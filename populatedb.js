@@ -130,7 +130,22 @@ function createSpeciesCultivarsFlavors(cb) {
         [
             // create species:
             function(callback) {
-                speciesCreate('Species0', 'Species0 description', callback);
+                speciesCreate('Brassica juncea', 'Brassica juncea is a species containing a range of mustard plants. B. juncea can be divided into four major subgroups: integrifolia, juncea, napiformis, and tsatsai.', callback);
+            },
+            function(callback) {
+                speciesCreate('Brassica oleracea', 'Species0 description', callback);
+            },
+            function(callback) {
+                speciesCreate('Brassica rapa', 'Species0 description', callback);
+            },
+            function(callback) {
+                speciesCreate('Raphanus raphanistrum', 'Species0 description', callback);
+            },
+            function(callback) {
+                speciesCreate('Armoracia rusticana', 'Species0 description', callback);
+            },
+            function(callback) {
+                speciesCreate('Eutrema japonicum', 'Species0 description', callback);
             },
             // create cultivars:
             function(callback) {
