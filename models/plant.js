@@ -13,6 +13,11 @@ const PlantSchema = new Schema({
         ref: 'Species',
         required: true
     },
+    cultivar: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Cultivar',
+        required: true
+    }],
     description: {
         type: String,
         required: true
