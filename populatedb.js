@@ -133,19 +133,19 @@ function createSpeciesCultivarsFlavors(cb) {
                 speciesCreate('Brassica juncea', 'Brassica juncea is a species containing a range of mustard plants. B. juncea can be divided into four major subgroups: integrifolia, juncea, napiformis, and tsatsai.', callback);
             },
             function(callback) {
-                speciesCreate('Brassica oleracea', 'Species0 description', callback);
+                speciesCreate('Brassica oleracea', 'Brassica oleracea is a plant species that includes many common cultivars used as vegetables, such as cabbage, broccoli, cauliflower, kale, Brussels sprouts, collard greens, Savoy cabbage, kohlrabi, and gai lan. Its uncultivated form, wild cabbage, native to coastal southern and western Europe, is a hardy plant with high tolerance for salt and lime.', callback);
             },
             function(callback) {
-                speciesCreate('Brassica rapa', 'Species0 description', callback);
+                speciesCreate('Brassica rapa', 'Brassica rapa is a plant species growing in various widely cultivated forms including the turnip, napa cabbage, bomdong, bok choy, and rapini.', callback);
             },
             function(callback) {
-                speciesCreate('Raphanus raphanistrum', 'Species0 description', callback);
+                speciesCreate('Raphanus raphanistrum', 'Raphanus raphanistrum, also known as wild radish, white charlock or jointed charlock, is a flowering plant in the family Brassicaceae. One of its subspecies, Raphanus raphanistrum subsp. sativus, includes a diverse variety of cultivated radishes. The species is native to western Asia, Europe and parts of Northern Africa.', callback);
             },
             function(callback) {
-                speciesCreate('Armoracia rusticana', 'Species0 description', callback);
+                speciesCreate('Armoracia rusticana', 'Armoracia rusticana, commonly known as horseradish, is a perennial plant of the family Brassicaceae. It is a root vegetable, cultivated and used worldwide as a spice and as a condiment. The species is probably native to southeastern Europe and western Asia.', callback);
             },
             function(callback) {
-                speciesCreate('Eutrema japonicum', 'Species0 description', callback);
+                speciesCreate('Eutrema japonicum', 'Eutrema japonicum (wasabi or Japanese horseradish) is a plant of the family Brassicaceae native to Japan, the Russian Far East, and the Korean Peninsula. It grows naturally along stream beds in mountain river valleys in Japan. It is grown for its rhizomes which are ground into a paste as a pungent condiment for sushi and other foods.', callback);
             },
             // create cultivars:
             function(callback) {
