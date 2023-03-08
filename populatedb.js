@@ -28,4 +28,40 @@ const plants = [];
 const allSpecies = [];
 const stockItems = [];
 
-function cultivarCreate();
+function cultivarCreate(cultivar_name, cultivar_description, cb) {
+    cultivarDetail = {
+        name: cultivar_name,
+        description: cultivar_description
+    }
+
+    const cultivar = new Cultivar(cultivarDetail);
+
+    cultivar.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Cultivar: ' + cultivar);
+        cultivars.push(cultivar);
+        cb(null, cultivar);
+    });
+}
+
+// function createCultivars(cb) {
+//     async.series([
+//         function(callback) {
+//             cultivarCreate('test cultivar', 'test cultivar description', callback);
+//         }
+//     ],
+//     cb);
+// }
+
+// async.series(
+//     [createCultivars],
+//     function (err, results) {
+//         if (err) {
+//             console.log('FINAL ERR: ' + err);
+//         } 
+//         mongoose.connection.close();
+//     }
+// )
