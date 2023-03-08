@@ -121,7 +121,7 @@ function stockItemCreate(item_plant, item_organic, item_source, item_in_stock, c
         }
         console.log('New Stock Item: ' + stockItem);
         stockItems.push(stockItem);
-        cb(null, book);
+        cb(null, stockItem);
     });
 }
 
@@ -160,29 +160,26 @@ function createStockItems(cb) {
     async.parallel(
         [
             function(callback) {
-                stockItemCreate(PARAMS HERE!!);
+                stockItemCreate(plants[0], true, 'Local', true, callback);
             }
         ],
         cb
-    )
+    );
 }
 
-
-// function createCultivars(cb) {
-//     async.series([
-//         function(callback) {
-//             cultivarCreate('test cultivar', 'test cultivar description', callback);
-//         }
-//     ],
-//     cb);
-// }
-
-// async.series(
-//     [createCultivars],
-//     function (err, results) {
-//         if (err) {
-//             console.log('FINAL ERR: ' + err);
-//         } 
-//         mongoose.connection.close();
-//     }
-// )
+async.series(
+    [
+        createSpeciesCultivarsFlavors,
+        createPlants,
+        createStockItems
+    ],
+    function(err, results) {
+        if (err) {
+            console.log('FINAL ERROR: ' + err);
+        }
+        else {
+            console.log('Stock Items: ' + stockItems);
+        }
+        mongoose.connection.close();
+    }
+);
