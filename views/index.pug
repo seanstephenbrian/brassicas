@@ -1,5 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Welcome to #[strong brassicaDB]! This is a demo web app built with Node.js, Express, and MongoDB.
+    p #[strong brassicaDB] is an editable inventory of vegetable varieties from the plant genus 
+        a(href='https://en.wikipedia.org/wiki/Brassica') Brassica
+        | .
+    | The collection can be filtered by Brassica variety, species, cultivar/subspecies, and flavor notes.
+    p Here is the current inventory of items in our database:
+
+    h1 brassicaDB Inventory:
+    if error 
+        p We're sorry, we encountered an error retrieving the data.
+    else
+        ul 
+            li #[strong Plant Varieties:] 
+                a(href='/inventory/plants') !{data.plantCount}
+            li #[strong Brassica Species:] 
+                a(href='/inventory/species-list') !{data.speciesCount}
+            li #[strong Brassica Cultivars:] 
+                a(href='/inventory/cultivars') !{data.cultivarCount}
+            li #[strong Flavors:] 
+                a(href='/inventory/flavors') !{data.flavorCount}

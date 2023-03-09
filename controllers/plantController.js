@@ -1,9 +1,36 @@
 const Plant = require('../models/plant');
+const Cultivar = require('../models/cultivar');
+const Flavor = require('../models/flavor');
+const Species = require('../models/species');
+
+const async = require('async');
 
 // site welcome page:
 exports.index = (req, res) => {
-    res.send('HOME PAGE');
-};
+    async.parallel(
+        {
+            plantCount(callback) {
+                Plant.countDocuments({}, callback);
+            },
+            speciesCount(callback) {
+                Species.countDocuments({}, callback);
+            },
+            cultivarCount(callback) {
+                Cultivar.countDocuments({}, callback);
+            },
+            flavorCount(callback) {
+                Flavor.countDocuments({}, callback);
+            }
+        },
+        (err, results) => {
+            res.render('index', {
+                title: 'brassicaDB - Home',
+                error: err,
+                data: results
+            });
+        }
+    );
+}
 
 // display all plants:
 exports.plant_list = (req, res) => {

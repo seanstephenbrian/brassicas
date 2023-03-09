@@ -1,7 +1,35 @@
 doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+html(lang='en')
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+    body
+        header
+            div(class='title') brassicaDB
+            nav
+                ul(class='nav-list')
+                    li
+                        a(href='inventory') Home
+                    li
+                        a(href='inventory/plants') All Plant Varieties
+                    li
+                        a(href='inventory/species-list') Main Brassica Species
+                    li
+                        a(href='inventory/cultivars') Cultivars/Subspecies
+                    li
+                        a(href='inventory/flavors') Flavor Tags
+                    li 
+                        a(href='inventory/plant/create') Create New Plant Variety 
+                    li 
+                        a(href='inventory/species/create') Create New Species
+                    li 
+                        a(href='inventory/cultivar/create') Create New Cultivar 
+                    li 
+                        a(href='inventory/flavor/create') Create New Flavor
+        main
+            block content
+        footer
+            - const year = (new Date()).getFullYear()
+            div(class='copyright') copyright © #{year} - ssbbd
