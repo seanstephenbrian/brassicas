@@ -7,10 +7,6 @@ const FlavorSchema = new Schema({
         type: String,
         required: true,
         maxLength: 50
-    },
-    description: {
-        type: String,
-        required: true
     }
 });
 

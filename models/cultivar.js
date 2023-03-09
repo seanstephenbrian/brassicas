@@ -8,8 +8,9 @@ const CultivarSchema = new Schema({
         required: true,
         maxLength: 100
     },
-    description: {
-        type: String,
+    species: {
+        type: Schema.Types.ObjectId,
+        ref: 'Species',
         required: true
     }
 });
