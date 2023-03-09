@@ -33,8 +33,31 @@ exports.index = (req, res) => {
 }
 
 // display all plants:
-exports.plant_list = (req, res) => {
-    res.send('PLANT LIST');
+exports.plant_list = function(req, res, next) {
+    Plant.find({}, "name species cultivar description flavor in_stock")
+        .sort({ name: 1 })
+        .populate('species flavor cultivar')
+        .exec(function (err, list_plants) {
+            if (err) {
+                return next(err);
+            }
+            // console.log(list_plants);
+            list_plants.forEach(plant => {
+                if (plant.cultivar.length === 1) {
+                    plant.cultivar_list = plant.cultivar[0].name;
+                }
+                if (plant.cultivar.length === 2) {
+                    plant.cultivar_list = plant.cultivar[0].name + ' x ' + plant.cultivar[1].name;
+                }
+            });
+            res.render(
+                'plant_list',
+                {
+                    title: 'Variety List',
+                    plant_list: list_plants
+                }
+            );
+        });
 }
 
 // detail page for a specific plant:
