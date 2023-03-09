@@ -53,7 +53,7 @@ exports.plant_list = function(req, res, next) {
             res.render(
                 'plant_list',
                 {
-                    title: 'Variety List',
+                    title: 'brassicaDB | All Varieties',
                     plant_list: list_plants
                 }
             );
