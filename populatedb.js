@@ -10,7 +10,6 @@ const Cultivar = require('./models/cultivar');
 const Flavor = require('./models/flavor');
 const Plant = require('./models/plant');
 const Species = require('./models/species');
-const StockItem = require('./models/stockitem');
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
@@ -26,7 +25,6 @@ const cultivars = [];
 const flavors = [];
 const plants = [];
 const allSpecies = [];
-const stockItems = [];
 
 function cultivarCreate(cultivar_name, cultivar_species, cb) {
     const cultivarDetail = {
@@ -74,6 +72,9 @@ function plantCreate(plant_name, plant_species, plant_cultivar, plant_descriptio
     }
 
     const plant = new Plant(plantDetail);
+
+    console.log(plantDetail);
+    console.log(cb);
 
     plant.save(function(err) {
         if (err) {
@@ -231,7 +232,7 @@ function createCultivars(cb) {
                 cultivarCreate('Oleiformis', allSpecies[4], callback); // 29
             },
             function(callback) {
-                cultivarCreate('Raphanistroides', allSpecies[4], callback); // 30
+                cultivarCreate('Raphanistroides', allSpecies[4], callback); // 30   
             }
         ],
         cb
@@ -401,7 +402,7 @@ function createPlants(cb) {
                 plantCreate('Oilseed radish', allSpecies[4], [cultivars[25], cultivars[29]], 'description', [flavors[0]], true, callback);
             },
             function(callback) {
-                plantCreate('Wild radish', allSpecies[4], [cultivars[25]], cultivars[30], 'description', [flavors[0]], true, callback);
+                plantCreate('Wild radish', allSpecies[4], [cultivars[25], cultivars[30]], 'description', [flavors[0]], true, callback);
             },
             function(callback) {
                 plantCreate('Red radish', allSpecies[4], [cultivars[25]], 'description', [flavors[0]], true, callback);
@@ -426,9 +427,6 @@ async.series(
     function(err, results) {
         if (err) {
             console.log('FINAL ERROR: ' + err);
-        }
-        else {
-            console.log('Stock Items: ' + stockItems);
         }
         mongoose.connection.close();
     }
