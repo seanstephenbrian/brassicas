@@ -130,7 +130,7 @@ function createSpeciesFlavors(cb) {
             },
             // create flavors:
             function(callback) {
-                flavorCreate('Flavor0', callback);
+                flavorCreate('test flavor', callback);
             }
         ],
         cb
@@ -242,7 +242,175 @@ function createPlants(cb) {
     async.parallel(
         [
             function(callback) {
-                plantCreate('Plant0', allSpecies[0], [cultivars[0]], 'Plant0 description', [flavors[0]], true, callback);
+                plantCreate('Leaf mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Korean red mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Japanese giant red mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Snow mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Curled leaf mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Mizuna', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Large-petiole mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Horned mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Head mustard', allSpecies[0], [cultivars[0]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Canola', allSpecies[0], [cultivars[1]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Root mustard', allSpecies[0], [cultivars[2]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Multishoot mustard', allSpecies[0], [cultivars[3]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Zha cai', allSpecies[0], [cultivars[3]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Wild cabbage', allSpecies[1], [cultivars[4]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Cabbage', allSpecies[1], [cultivars[4]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Savoy cabbage', allSpecies[1], [cultivars[4]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Red cabbage', allSpecies[1], [cultivars[4]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Cone cabbage', allSpecies[1], [cultivars[4]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Gai lan', allSpecies[1], [cultivars[5]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Collard greens', allSpecies[1], [cultivars[6]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Jersey cabbage', allSpecies[1], [cultivars[7]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Ornamental kale', allSpecies[1], [cultivars[8]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Kale', allSpecies[1], [cultivars[8]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Kalette', allSpecies[1], [cultivars[6], cultivars[9]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Lacinato kale', allSpecies[1], [cultivars[8]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Perpetual kale', allSpecies[1], [cultivars[8]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Tronchuda kale', allSpecies[1], [cultivars[10]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Brussels sprouts', allSpecies[1], [cultivars[9]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Kohlrabi', allSpecies[1], [cultivars[11]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Broccoli', allSpecies[1], [cultivars[12]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Cauliflower', allSpecies[1], [cultivars[13]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Caulini', allSpecies[1], [cultivars[13]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Romanesco broccoli', allSpecies[1], [cultivars[13]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Broccoli di Torbole', allSpecies[1], [cultivars[13]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Broccoflower', allSpecies[1], [cultivars[13], cultivars[12]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Broccolini', allSpecies[1], [cultivars[13], cultivars[5]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Bok choy', allSpecies[2], [cultivars[14]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Bomdong', allSpecies[2], [cultivars[15]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Choy sum', allSpecies[2], [cultivars[14]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Field mustard', allSpecies[2], [cultivars[16]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Komatsuna', allSpecies[2], [cultivars[17]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Mizuna', allSpecies[2], [cultivars[18]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Napa cabbage', allSpecies[2], [cultivars[15]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Rapini', allSpecies[2], [cultivars[19]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Tatsoi', allSpecies[2], [cultivars[20]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Turnip', allSpecies[2], [cultivars[21]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Yellow sarson', allSpecies[2], [cultivars[22]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Rapeseed', allSpecies[3], [cultivars[23]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Rutabaga', allSpecies[3], [cultivars[24]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Green radish', allSpecies[4], [cultivars[25], cultivars[26]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Daikon radish', allSpecies[4], [cultivars[25], cultivars[27]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Black radish', allSpecies[4], [cultivars[25], cultivars[28]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Oilseed radish', allSpecies[4], [cultivars[25], cultivars[29]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Wild radish', allSpecies[4], [cultivars[25]], cultivars[30], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Red radish', allSpecies[4], [cultivars[25]], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Horseradish', allSpecies[5], [], 'description', [flavors[0]], true, callback);
+            },
+            function(callback) {
+                plantCreate('Wasabi', allSpecies[6], [], 'description', [flavors[0]], true, callback);
             }
         ],
         cb
