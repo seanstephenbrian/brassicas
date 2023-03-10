@@ -1,8 +1,21 @@
 const Species = require('../models/species');
 
 // display all species:
-exports.species_list = (req, res) => {
-    res.send('SPECIES LIST');
+exports.species_list = function(req, res, next) {
+    Species.find({}, "name")
+        .sort({ name: 1 })
+        .exec(function (err, list_species) {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'species_list',
+                {
+                    title: 'brassicaDB | All Species',
+                    species_list: list_species
+                }
+            );
+        });
 }
 
 // detail page for a specific species:
