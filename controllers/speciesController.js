@@ -1,5 +1,7 @@
 const Species = require('../models/species');
 
+const async = require('async');
+
 // display all species:
 exports.species_list = function(req, res, next) {
     Species.find({}, "name")
@@ -19,8 +21,30 @@ exports.species_list = function(req, res, next) {
 }
 
 // detail page for a specific species:
-exports.species_detail = (req, res) => {
-    res.send(`SPECIES DETAIL: ${req.params.id}`);
+exports.species_detail = (req, res, next) => {
+    async.parallel(
+        {
+            speciesDetail(callback) {
+                Species.findOne({ _id: req.params.id }, 'name description')
+                    .exec(callback);
+            },
+            // IMPLEMENT speciesPlant search
+            // speciesPlants(callback) {
+            // }
+        },
+        (err, species_info) => {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'species_detail',
+                {
+                    title: `brassicaDB | ${species_info.speciesDetail.name}`,
+                    species_data: species_info.speciesDetail
+                }
+            );
+        }
+    );
 }
 
 // display author create form on GET:

@@ -3,7 +3,7 @@ const Flavor = require('../models/flavor');
 // display all flavors:
 exports.flavor_list = function(req, res, next) {
     Flavor.find({}, 'flavor')
-        .sort({ flavor: 1 })
+        .sort({ name: 1 })
         .exec(function (err, list_flavors) {
             if (err) {
                 return next(err);
@@ -19,8 +19,21 @@ exports.flavor_list = function(req, res, next) {
 }
 
 // detail page for a specific flavor:
-exports.flavor_detail = (req, res) => {
-    res.send(`FLAVOR DETAIL: ${req.params.id}`);
+exports.flavor_detail = function(req, res, next) {
+    Flavor.findOne({ _id: req.params.id}, 'flavor')
+        .exec(function (err, flavor_info) {
+            if (err) {
+                return next(err);
+            }
+            console.log(flavor_info);
+            res.render(
+                'flavor_detail', 
+                {
+                    title: `brassicaDB | ${flavor_info.flavor}`,
+                    flavor_data: flavor_info
+                }
+            );
+        });
 }
 
 // display author create form on GET:

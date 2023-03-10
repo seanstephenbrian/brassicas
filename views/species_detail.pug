@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1= title 
+
+    div(class='species-info')
+        div(class='species-name') #{species_data.name}
+        div(class='species-description') 
+            div(class='species-description-label') Description:
+            div(class='species-description-body') #{species_data.description}
+        div(class='species-plants') Plant varieties in this species:
+            p PLANTS WILL GO HERE

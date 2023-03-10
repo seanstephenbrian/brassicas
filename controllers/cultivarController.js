@@ -42,7 +42,7 @@ exports.cultivar_detail = (req, res, next) => {
             res.render(
                 'cultivar_detail',
                 {
-                    title: `brassicaDB | ${cultivar_info.name}`,
+                    title: `brassicaDB | ${cultivar_info.cultivarDetail.name}`,
                     cultivar_data: cultivar_info.cultivarDetail
                 }
             );

@@ -118,7 +118,7 @@ function createSpeciesFlavors(cb) {
                 speciesCreate('Brassica rapa', 'Brassica rapa is a plant species grown in various widely cultivated forms including the turnip, napa cabbage, bomdong, bok choy, and rapini.', callback);
             },
             function(callback) {
-                speciesCreate('Brassica napus', 'Brassica napus is a plants species cultivated mainly for its oil-rich seed, commonly known as rapeseed, which is the third-largest source of vegetable oil and the second-largest source of protein meal in the world. The root vegetable rutabaga is another cultivar of Brassica napus. The species originated as a hybrid between the cabbage (Brassica oleracea) and the turnip (Brassica rapa).', callback);
+                speciesCreate('Brassica napus', 'Brassica napus is a plant species cultivated mainly for its oil-rich seed, commonly known as rapeseed, which is the third-largest source of vegetable oil and the second-largest source of protein meal in the world. The root vegetable rutabaga is another cultivar of Brassica napus. The species originated as a hybrid between the cabbage (Brassica oleracea) and the turnip (Brassica rapa).', callback);
             },
             function(callback) {
                 speciesCreate('Raphanus raphanistrum', 'Raphanus raphanistrum, also known as wild radish, white charlock or jointed charlock, is a flowering plant in the family Brassicaceae. One of its subspecies, Raphanus raphanistrum subsp. sativus, includes a diverse variety of cultivated radishes. The species is native to western Asia, Europe and parts of Northern Africa.', callback);

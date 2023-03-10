@@ -41,7 +41,6 @@ exports.plant_list = function(req, res, next) {
             if (err) {
                 return next(err);
             }
-            // console.log(list_plants);
             list_plants.forEach(plant => {
                 if (plant.cultivar.length === 1) {
                     plant.cultivar_list = plant.cultivar[0].name;
