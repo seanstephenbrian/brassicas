@@ -1,4 +1,7 @@
 const Cultivar = require('../models/cultivar');
+const Plant = require('../models/plant');
+
+const async = require('async');
 
 // display all cultivars:
 exports.cultivar_list = function(req, res, next) {
@@ -20,8 +23,31 @@ exports.cultivar_list = function(req, res, next) {
 }
 
 // detail page for a specific cultivar:
-exports.cultivar_detail = (req, res) => {
-    res.send(`CULTIVAR DETAIL: ${req.params.id}`);
+exports.cultivar_detail = (req, res, next) => {
+    async.parallel(
+        {
+            cultivarDetail(callback) {
+                Cultivar.findOne({ _id: req.params.id }, 'name species')
+                    .populate('species')
+                    .exec(callback);
+            },
+            // IMPLEMENT cultivarPlants search
+            // cultivarPlants(callback) {
+            // }
+        },
+        (err, cultivar_info) => {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'cultivar_detail',
+                {
+                    title: `brassicaDB | ${cultivar_info.name}`,
+                    cultivar_data: cultivar_info.cultivarDetail
+                }
+            );
+        }
+    );
 }
 
 // display author create form on GET:

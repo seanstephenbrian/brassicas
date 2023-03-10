@@ -2,7 +2,20 @@ const Flavor = require('../models/flavor');
 
 // display all flavors:
 exports.flavor_list = function(req, res, next) {
-    
+    Flavor.find({}, 'flavor')
+        .sort({ flavor: 1 })
+        .exec(function (err, list_flavors) {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'flavor_list',
+                {
+                    title: 'brassicaDB | All Flavors',
+                    flavor_list: list_flavors
+                }
+            );
+        });
 }
 
 // detail page for a specific flavor:

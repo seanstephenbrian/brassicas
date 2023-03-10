@@ -1,0 +1,11 @@
+extends layout 
+
+block content 
+    h1= title 
+
+    div(class='cultivar-info')
+        div(class='cultivar-name') #{cultivar_data.name}
+        div(class='cultivar-species') Species: 
+            a(href=cultivar_data.species.url) #{cultivar_data.species.name}
+        div(class='cultivar-plants') Plants:
+            p PLANTS WILL GO HERE
