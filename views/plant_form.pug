@@ -32,9 +32,14 @@ block content
       label Flavors:
       div
         for flavor in flavors
-          div(style='display: inline; padding-right:10px;')
+          div
             input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=flavor.checked )
             label(for=flavor._id) #{flavor.flavor}
+    div.form-section
+        label In Stock?
+        div
+            input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked )
+            label(for='in_stock') Yes
     button(type='submit') Submit
 
   if errors

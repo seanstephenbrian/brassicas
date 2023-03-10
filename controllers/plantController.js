@@ -108,116 +108,28 @@ exports.plant_create_get = (req, res, next) => {
 }
 
 // handle author create on POST:
-exports.plant_create_post = [
-    // convert species, cultivars, and flavors to arrays:
-    (req, res, next) => {
-        if (!Array.isArray(req.body.species)) {
-          req.body.species = 
-            typeof req.body.species === "undefined" ? [] : [req.body.species];
-        }
-        if (!Array.isArray(req.body.cultivars)) {
-            req.body.cultivars =
-                typeof req.body.cultivars === "undefined" ? [] : [req.body.cultivars];
-        }
-        if (!Array.isArray(req.body.flavors)) {
-            req.body.flavors =
-                typeof req.body.flavors === "undefined" ? [] : [req.body.flavors];
-        }
-        next();
-    },
+exports.plant_create_post = (req, res, next) => {
 
-    // validate and sanitize fields:
-    body('name', 'Plant name is required.')
-        .trim()
-        .isLength({ min: 1 })
-        .escape(),
-    body('in_stock', 'Stock availability status is required.')
-        .isBoolean()
-        .escape(),
-    body('description')
-        .trim()
-        .isLength({ min: 1 })
-        .escape(),
-    body('flavor.*').escape(),
-    body('species.*').escape(),
-    body('cultivar.*').escape(),
+    res.send(req.body);
+    // const plantInput = {
+    //     name: req.body.name,
+    //     species: req.body.species,
+    //     cultivar: [req.body.cultivars],
+    //     description: req.body.description,
+    //     flavor: [req.body.flavor],
+    //     in_stock: req.body.in_stock
+    // }
 
-    // process request after validation and sanitization:
-    (req, res, next) => {
-        // extract validation errors:
-        const errors = validationResult(req);
+    // const newPlant = new Plant(plantInput);
 
-        // create plant object with escaped and trimmed data:
-        const plant = new Plant({
-            name: req.body.name,
-            species: req.body.species,
-            cultivar: req.body.cultivar,
-            description: req.body.description,
-            flavor: req.body.flavor,
-            in_stock: req.body.in_stock,
-        });
-
-        // if there are errors, render form again with sanitized values & error messages:
-        if (!errors.isEmpty()) {
-            async.parallel(
-                {
-                    species(callback) {
-                        Species.find(callback);
-                    },
-                    cultivars(callback) {
-                        Cultivar.find(callback);
-                    },
-                    flavors(callback) {
-                        Flavor.find(callback);
-                    },
-                },
-                (err, results) => {
-                    if (err) {
-                        return next(err);
-                    }
-
-                    // mark selected species, cultivars, and flavors as checked:
-                    for (const oneSpecies of results.species) {
-                        console.log(plant.species);
-                        if (plant.species.includes(oneSpecies._id)) {
-                            oneSpecies.checked = 'true';
-                        }
-                    }
-                    for (const cultivar of results.cultivars) {
-                        if (plant.cultivar.includes(cultivar._id)) {
-                            cultivar.checked = 'true';
-                        }
-                    }
-                    for (const flavor of results.flavors) {
-                        if (plant.flavor.includes(flavor._id)) {
-                            flavor.checked = 'true';
-                        }
-                    }
-
-                    res.render('plant_form', {
-                        title: 'Add a New Plant to brassicaDB',
-                        name: req.body.name,
-                        species: results.species,
-                        cultivars: results.cultivars,
-                        description: req.body.description,
-                        flavor: results.flavors,
-                        in_stock: req.body.in_stock            
-                    });
-                }
-            );
-            return;
-        }
-
-        // data is valid:
-        plant.save((err) => {
-            if (err) {
-                return next(err);
-            }
-            // successful - redirect to new plant record:
-            res.redirect(plant.url);
-        });
-    },
-]
+    // newPlant.save(function(err) {
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     console.log('New Plant: ' + plant);
+    //     next();
+    // });
+}
 
 // display plant delete form on GET:
 exports.plant_delete_get = (req, res) => {
