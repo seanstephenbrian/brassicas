@@ -1,8 +1,22 @@
 const Cultivar = require('../models/cultivar');
 
 // display all cultivars:
-exports.cultivar_list = (req, res) => {
-    res.send('CULTIVAR LIST');
+exports.cultivar_list = function(req, res, next) {
+    Cultivar.find({}, "name species")
+        .sort({ name: 1 })
+        .populate('species')
+        .exec(function (err, list_cultivars) {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'cultivar_list',
+                {
+                    title: 'brassicaDB | All Cultivars',
+                    cultivar_list: list_cultivars
+                }
+            );
+        });
 }
 
 // detail page for a specific cultivar:

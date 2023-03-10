@@ -11,9 +11,9 @@ block content
                 -
                     let stockStatus;
                     if (plant.in_stock) {
-                        stockStatus = 'In Stock';
+                        stockStatus = 'Available';
                     } else {
-                        stockStatus = 'Not In Stock';
+                        stockStatus = 'Not Available';
                     }
                 span(class='stock-status') [#{stockStatus}]
         else 
