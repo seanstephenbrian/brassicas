@@ -193,14 +193,29 @@ exports.plant_create_post = [
                             flavor.checked = 'true';
                         }
                     }
+
+                    res.render('plant_form', {
+                        title: 'Add a New Plant to brassicaDB',
+                        species: results.species,
+                        cultivars: results.cultivars,
+                        flavors: results.flavors,
+                        errors: errors.array()
+                    });
                 }
-            )
+            );
+            return;
         }
-    }
-    
 
+        // data is valid:
+        plant.save((err) => {
+            if (err) {
+                return next(err);
+            }
+            // successful - redirect to new plant record:
+            res.redirect(plant.url);
+        });
+    },
 ]
-
 
 // display plant delete form on GET:
 exports.plant_delete_get = (req, res) => {
