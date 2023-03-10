@@ -1,4 +1,7 @@
 const Flavor = require('../models/flavor');
+const Plant = require('../models/plant');
+
+const async = require('async');
 
 // display all flavors:
 exports.flavor_list = function(req, res, next) {
@@ -19,21 +22,35 @@ exports.flavor_list = function(req, res, next) {
 }
 
 // detail page for a specific flavor:
-exports.flavor_detail = function(req, res, next) {
-    Flavor.findOne({ _id: req.params.id}, 'flavor')
-        .exec(function (err, flavor_info) {
+exports.flavor_detail = (req, res, next) => {
+    async.parallel(
+        {
+            flavorDetail(callback) {
+                Flavor.findOne({ _id: req.params.id}, 'flavor')
+                    .exec(callback);
+            },
+            flavorPlants(callback) {
+                Plant.find( { flavor: { $in: { _id: req.params.id } } } )
+                    .sort({ flavor: 1 })
+                    .exec(callback);
+            }
+        },
+        (err, results) => {
             if (err) {
                 return next(err);
             }
-            console.log(flavor_info);
+            console.log(results.flavorPlants);
             res.render(
                 'flavor_detail', 
                 {
-                    title: `brassicaDB | ${flavor_info.flavor}`,
-                    flavor_data: flavor_info
+                    title: `brassicaDB | ${results.flavorDetail.flavor}`,
+                    flavor_data: results.flavorDetail,
+                    flavor_plants: results.flavorPlants
                 }
             );
-        });
+        }
+    )
+    
 }
 
 // display author create form on GET:
