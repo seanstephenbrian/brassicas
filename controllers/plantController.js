@@ -61,8 +61,21 @@ exports.plant_list = function(req, res, next) {
 }
 
 // detail page for a specific plant:
-exports.plant_detail = (req, res) => {
-    res.send(`PLANT DETAIL: ${req.params.id}`);
+exports.plant_detail = function(req, res, next) {
+    Plant.findOne({ _id: req.params.id}, 'name species cultivar description flavor in_stock')
+        .populate('species flavor cultivar')
+        .exec(function (err, plant_info) {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'plant_detail', 
+                {
+                    title: `brassicaDB | ${plant_info.name}`,
+                    plant_data: plant_info
+                }
+            );
+        });
 }
 
 // display author create form on GET:

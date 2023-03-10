@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    h1= title 
+
+    div(class='plant-info')
+        div(class='plant-name') #{plant_data.name}
+        div(class='plant-classification')
+            div(class='plant-species') Species: #{plant_data.species.name}
+            div(class='plant-cultivars') Cultivars: 
+                each oneCultivar in plant_data.cultivar 
+                    div(class='plant-cultivar') #{oneCultivar.name}
+        div(class='plant-flavors') Flavors: 
+            each oneFlavor in plant_data.flavor
+                div(class='plant-flavor') #{oneFlavor.flavor}
+        div(class='plant-in-stock')
+            -
+                let stockStatus;
+                if (plant_data.in_stock) stockStatus = 'Available';
+                if (!plant_data.in_stock) stockStatus = 'Not Available';
+        | #{stockStatus}
