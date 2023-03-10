@@ -8,4 +8,7 @@ block content
         div(class='cultivar-species') Species: 
             a(href=cultivar_data.species.url) #{cultivar_data.species.name}
         div(class='cultivar-plants') Plant varieties in this cultivar:
-            p PLANTS WILL GO HERE
+            ul
+                each plant in cultivar_plants 
+                    li 
+                        a(href=plant.url) #{plant.name}

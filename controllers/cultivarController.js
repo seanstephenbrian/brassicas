@@ -31,19 +31,24 @@ exports.cultivar_detail = (req, res, next) => {
                     .populate('species')
                     .exec(callback);
             },
+            cultivarPlants(callback) {
+                Plant.find( { cultivar: { $in: { _id: req.params.id } } } )
+                    .exec(callback);
+            }
             // IMPLEMENT cultivarPlants search
             // cultivarPlants(callback) {
             // }
         },
-        (err, cultivar_info) => {
+        (err, results) => {
             if (err) {
                 return next(err);
             }
             res.render(
                 'cultivar_detail',
                 {
-                    title: `brassicaDB | ${cultivar_info.cultivarDetail.name}`,
-                    cultivar_data: cultivar_info.cultivarDetail
+                    title: `brassicaDB | ${results.cultivarDetail.name}`,
+                    cultivar_data: results.cultivarDetail,
+                    cultivar_plants: results.cultivarPlants
                 }
             );
         }
