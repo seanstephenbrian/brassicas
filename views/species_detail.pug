@@ -9,4 +9,7 @@ block content
             div(class='species-description-label') Description:
             div(class='species-description-body') #{species_data.description}
         div(class='species-plants') Plant varieties in this species:
-            p PLANTS WILL GO HERE
+            ul
+                each plant in species_plants 
+                    li 
+                        a(href=plant.url) #{plant.name}

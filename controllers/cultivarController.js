@@ -33,11 +33,9 @@ exports.cultivar_detail = (req, res, next) => {
             },
             cultivarPlants(callback) {
                 Plant.find( { cultivar: { $in: { _id: req.params.id } } } )
+                    .sort({ name: 1 })
                     .exec(callback);
             }
-            // IMPLEMENT cultivarPlants search
-            // cultivarPlants(callback) {
-            // }
         },
         (err, results) => {
             if (err) {

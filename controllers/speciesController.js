@@ -1,4 +1,5 @@
 const Species = require('../models/species');
+const Plant = require('../models/plant');
 
 const async = require('async');
 
@@ -28,19 +29,22 @@ exports.species_detail = (req, res, next) => {
                 Species.findOne({ _id: req.params.id }, 'name description')
                     .exec(callback);
             },
-            // IMPLEMENT speciesPlant search
-            // speciesPlants(callback) {
-            // }
+            speciesPlants(callback) {
+                Plant.find( { species: { $in: { _id: req.params.id } } } )
+                    .sort({ name: 1 })
+                    .exec(callback);
+            }
         },
-        (err, species_info) => {
+        (err, results) => {
             if (err) {
                 return next(err);
             }
             res.render(
                 'species_detail',
                 {
-                    title: `brassicaDB | ${species_info.speciesDetail.name}`,
-                    species_data: species_info.speciesDetail
+                    title: `brassicaDB | ${results.speciesDetail.name}`,
+                    species_data: results.speciesDetail,
+                    species_plants: results.speciesPlants
                 }
             );
         }
