@@ -6,13 +6,16 @@ block content
     div(class='plant-info')
         div(class='plant-name') #{plant_data.name}
         div(class='plant-classification')
-            div(class='plant-species') Species: #{plant_data.species.name}
+            div(class='plant-species') Species: 
+                a(href=plant_data.species.url) #{plant_data.species.name}
             div(class='plant-cultivars') Cultivars: 
                 each oneCultivar in plant_data.cultivar 
-                    div(class='plant-cultivar') #{oneCultivar.name}
+                    div(class='plant-cultivar') 
+                        a(href=oneCultivar.url) #{oneCultivar.name}
         div(class='plant-flavors') Flavors: 
             each oneFlavor in plant_data.flavor
-                div(class='plant-flavor') #{oneFlavor.flavor}
+                div(class='plant-flavor') 
+                    a(href=oneFlavor.url) #{oneFlavor.flavor}
         div(class='plant-in-stock')
             -
                 let stockStatus;
