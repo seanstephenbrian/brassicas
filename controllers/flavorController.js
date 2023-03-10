@@ -1,8 +1,8 @@
 const Flavor = require('../models/flavor');
 
 // display all flavors:
-exports.flavor_list = (req, res) => {
-    res.send('FLAVOR LIST');
+exports.flavor_list = function(req, res, next) {
+    
 }
 
 // detail page for a specific flavor:
