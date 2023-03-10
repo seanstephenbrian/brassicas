@@ -4,6 +4,7 @@ const Flavor = require('../models/flavor');
 const Species = require('../models/species');
 
 const async = require('async');
+const { body, validationResult } = require('express-validator');
 
 // site welcome page:
 exports.index = (req, res) => {
@@ -78,14 +79,128 @@ exports.plant_detail = function(req, res, next) {
 }
 
 // display author create form on GET:
-exports.plant_create_get = (req, res) => {
-    res.send('PLANT CREATE GET');
+exports.plant_create_get = (req, res, next) => {
+    // get all species, cultivars, and flavors:
+    async.parallel(
+        {
+            species(callback) {
+                Species.find(callback);
+            },
+            cultivars(callback) {
+                Cultivar.find(callback);
+            },
+            flavors(callback) {
+                Flavor.find(callback)
+            }
+        },
+        (err, results) => {
+            if (err) {
+                return next(err);
+            }
+            res.render('plant_form', {
+                title: 'Add a New Plant to brassicaDB',
+                species: results.species,
+                cultivars: results.cultivars,
+                flavors: results.flavors
+            });
+        }
+    );
 }
 
 // handle author create on POST:
-exports.plant_create_post = (req, res) => {
-    res.send('PLANT CREATE POST');
-}
+exports.plant_create_post = [
+    // convert species, cultivars, and flavors to arrays:
+    (req, res, next) => {
+        if (!Array.isArray(req.body.species)) {
+          req.body.species = 
+            typeof req.body.species === "undefined" ? [] : [req.body.species];
+        }
+        if (!Array.isArray(req.body.cultivars)) {
+            req.body.cultivars =
+                typeof req.body.cultivars === "undefined" ? [] : [req.body.cultivars];
+        }
+        if (!Array.isArray(req.body.flavors)) {
+            req.body.flavors =
+                typeof req.body.flavors === "undefined" ? [] : [req.body.flavors];
+        }
+        next();
+    },
+
+    // validate and sanitize fields:
+    body('name', 'Plant name is required.')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('in_stock', 'Stock availability status is required.')
+        .isBoolean()
+        .escape(),
+    body('description')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('flavor.*'),
+    body('species.*'),
+    body('cultivar.*')
+        .escape(),
+
+    // process request after validation and sanitization:
+    (req, res, next) => {
+        // extract validation errors:
+        const errors = validationResult(req);
+
+        // create plant object with escaped and trimmed data:
+        const plant = new Plant({
+            name: req.body.name,
+            species: req.body.species,
+            cultivar: req.body.cultivar,
+            description: req.body.description,
+            flavor: req.body.flavor,
+            in_stock: req.body.in_stock,
+        });
+
+        // if there are errors, render form again with sanitized values & error messages:
+        if (!errors.isEmpty()) {
+            async.parallel(
+                {
+                    species(callback) {
+                        Species.find(callback);
+                    },
+                    cultivars(callback) {
+                        Cultivar.find(callback);
+                    },
+                    flavors(callback) {
+                        Flavor.find(callback);
+                    },
+                },
+                (err, results) => {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    // mark selected species, cultivars, and flavors as checked:
+                    for (const oneSpecies of results.species) {
+                        if (plant.species.includes(oneSpecies._id)) {
+                            oneSpecies.checked = 'true';
+                        }
+                    }
+                    for (const cultivar of results.cultivars) {
+                        if (plant.cultivar.includes(cultivar._id)) {
+                            cultivar.checked = 'true';
+                        }
+                    }
+                    for (const flavor of results.flavors) {
+                        if (plant.flavor.includes(flavor._id)) {
+                            flavor.checked = 'true';
+                        }
+                    }
+                }
+            )
+        }
+    }
+    
+
+]
+
 
 // display plant delete form on GET:
 exports.plant_delete_get = (req, res) => {

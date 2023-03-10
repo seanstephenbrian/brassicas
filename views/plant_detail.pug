@@ -19,6 +19,9 @@ block content
         div(class='plant-in-stock')
             -
                 let stockStatus;
-                if (plant_data.in_stock) stockStatus = 'Available';
+                if (plant_data.in_stock) stockStatus = 'Available!';
                 if (!plant_data.in_stock) stockStatus = 'Not Available';
         | #{stockStatus}
+        -   if (plant_data.in_stock)
+            button(class='purchase-button')
+                a(href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
