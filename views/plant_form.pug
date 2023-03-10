@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-section
+      label(for='name') Name:
+      input#name.form-input(type='text', placeholder='Name of plant' name='name' required='true' value=(undefined===plant ? '' : plant.name) )
+    div.form-section
+      label(for='species') Species:
+      select#species.form-input(type='select', placeholder='Select species' name='species' required='true' )
+        - species.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        for singleSpecies in species
+          if plant
+            option(value=singleSpecies._id selected=(singleSpecies._id.toString()===plant.singleSpecies._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
+          else
+            option(value=singleSpecies._id) #{singleSpecies.name}
+    div.form-section
+      label(for='cultivars') Cultivar:
+      select#cultivars.form-input(type='select', placeholder='Select cultivars' name='cultivars' required='true' )
+        - cultivars.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        for cultivar in cultivars
+          if plant
+            option(value=cultivar._id selected=(cultivar._id.toString()===plant.cultivar._id.toString() ? 'selected' : false) ) #{cultivar.name}
+          else
+            option(value=cultivar._id) #{cultivar.name}
+    div.form-section
+      label(for='description') Description:
+      textarea#description.form-input(type='textarea', placeholder='Description' name='description' required='true') #{undefined===plant ? '' : plant.description}
+    div.form-section
+      label Flavors:
+      div
+        for flavor in flavors
+          div(style='display: inline; padding-right:10px;')
+            input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=flavor.checked )
+            label(for=flavor._id) #{flavor.flavor}
+    button(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

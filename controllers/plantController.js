@@ -138,10 +138,9 @@ exports.plant_create_post = [
         .trim()
         .isLength({ min: 1 })
         .escape(),
-    body('flavor.*'),
-    body('species.*'),
-    body('cultivar.*')
-        .escape(),
+    body('flavor.*').escape(),
+    body('species.*').escape(),
+    body('cultivar.*').escape(),
 
     // process request after validation and sanitization:
     (req, res, next) => {
@@ -179,6 +178,7 @@ exports.plant_create_post = [
 
                     // mark selected species, cultivars, and flavors as checked:
                     for (const oneSpecies of results.species) {
+                        console.log(plant.species);
                         if (plant.species.includes(oneSpecies._id)) {
                             oneSpecies.checked = 'true';
                         }
@@ -196,10 +196,12 @@ exports.plant_create_post = [
 
                     res.render('plant_form', {
                         title: 'Add a New Plant to brassicaDB',
+                        name: req.body.name,
                         species: results.species,
                         cultivars: results.cultivars,
-                        flavors: results.flavors,
-                        errors: errors.array()
+                        description: req.body.description,
+                        flavor: results.flavors,
+                        in_stock: req.body.in_stock            
                     });
                 }
             );
