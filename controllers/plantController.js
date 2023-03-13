@@ -110,15 +110,36 @@ exports.plant_create_get = (req, res, next) => {
 // handle author create on POST:
 exports.plant_create_post = (req, res, next) => {
 
+    // convert in_stock to boolean:
+    let inStockStatus;
+
+    if (req.body.in_stock === 'true') {
+        inStockStatus = true;
+    } else {
+        inStockStatus = false;
+    }
+
+    // control for form submissions with no flavor specified:
+    let flavorInput;
+
+    if (req.body.flavor === undefined) {
+        flavorInput = '';
+    } else {
+        flavorInput = req.body.flavor;
+    }
+
+    console.log(flavorInput);
+
+    const newPlantDetails = {
+        name: req.body.name,
+        species: req.body.species,
+        cultivar: [req.body.cultivars],
+        description: req.body.description,
+        flavor: [flavorInput],
+        in_stock: inStockStatus
+    }
+
     res.send(req.body);
-    // const plantInput = {
-    //     name: req.body.name,
-    //     species: req.body.species,
-    //     cultivar: [req.body.cultivars],
-    //     description: req.body.description,
-    //     flavor: [req.body.flavor],
-    //     in_stock: req.body.in_stock
-    // }
 
     // const newPlant = new Plant(plantInput);
 
