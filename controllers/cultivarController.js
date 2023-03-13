@@ -1,7 +1,9 @@
 const Cultivar = require('../models/cultivar');
 const Plant = require('../models/plant');
+const Species = require('../models/species');
 
 const async = require('async');
+const { body, validationResult } = require("express-validator");
 
 // display all cultivars:
 exports.cultivar_list = function(req, res, next) {
@@ -53,15 +55,80 @@ exports.cultivar_detail = (req, res, next) => {
     );
 }
 
-// display author create form on GET:
-exports.cultivar_create_get = (req, res) => {
-    res.send('CULTIVAR CREATE GET');
+// display cultivar create form on GET:
+exports.cultivar_create_get = function(req, res, next) {
+    // get list of species:
+    Species.find({}, 'name')
+        .populate('name')
+        .exec(function (err, list_species) {
+            if (err) {
+                return next(err);
+            }
+            res.render(
+                'cultivar_form', 
+                {
+                    title: `Create a New Cultivar`,
+                    species_list: list_species
+                }
+            );
+        });
 }
 
-// handle author create on POST:
-exports.cultivar_create_post = (req, res) => {
-    res.send('CULTIVAR CREATE POST');
-}
+// handle cultivar create on POST:
+exports.cultivar_create_post = [
+    // validate & sanitize input field:
+    body('cultivar', 'New cultivar name required').trim().isLength({ min: 1 }).escape(),
+    // process request:
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        const cultivar = new Cultivar({ name: req.body.name, species: req.body.species });
+
+        // if there are validation errors, re-render the form:
+        if (!errors.isEmpty()) {
+            // get the species list again:
+            Species.find({}, 'name')
+                .populate('name')
+                .exec(function (err, list_species) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.render(
+                        'cultivar_form', 
+                        {
+                            title: 'Create a New Cultivar',
+                            cultivar,
+                            species_list: list_species,
+                            errors: errors.array(),
+                        }
+                    );
+                });
+            return;
+        // otherwise if successful:
+        } else {
+            // check if cultivar with same name already exists:
+            Cultivar.findOne({ name: req.body.name })
+                .exec((err, found_cultivar) => {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    // if it does, redirect to existing cultivar page:
+                    if (found_cultivar) {
+                        res.redirect(found_cultivar.url);
+                    // if not, save new cultivar and redirect to new page:
+                    } else {
+                        cultivar.save((err) => {
+                            if (err) {
+                                return next(err);
+                            }
+                            res.redirect(cultivar.url);
+                        });
+                    }
+            });
+        }
+    }
+];
 
 // display cultivar delete form on GET:
 exports.cultivar_delete_get = (req, res) => {

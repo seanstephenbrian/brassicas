@@ -5,7 +5,7 @@ block content
 
   form(method='POST' action='')
     div.form-section
-      label(for='name') Name:
+      label(for='name') New Plant Name:
       input#name.form-input(type='text', placeholder='Name of plant' name='name' required='true' value=(undefined===plant ? '' : plant.name) )
     div.form-section
       label(for='species') Species:
