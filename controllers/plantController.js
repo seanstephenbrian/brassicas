@@ -139,17 +139,17 @@ exports.plant_create_post = (req, res, next) => {
         in_stock: inStockStatus
     }
 
-    res.send(req.body);
 
-    // const newPlant = new Plant(plantInput);
+    const newPlant = new Plant(newPlantDetails);
 
-    // newPlant.save(function(err) {
-    //     if (err) {
-    //         return next(err);
-    //     }
-    //     console.log('New Plant: ' + plant);
-    //     next();
-    // });
+    newPlant.save(function(err) {
+        if (err) {
+            return next(err);
+        }
+        console.log('New Plant: ' + newPlant);
+        res.redirect(newPlant.url);
+    });
+    
 }
 
 // display plant delete form on GET:
