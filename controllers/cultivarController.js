@@ -77,7 +77,7 @@ exports.cultivar_create_get = function(req, res, next) {
 // handle cultivar create on POST:
 exports.cultivar_create_post = [
     // validate & sanitize input field:
-    body('cultivar', 'New cultivar name required').trim().isLength({ min: 1 }).escape(),
+    body('name', 'New cultivar name required').trim().isLength({ min: 1 }).escape(),
     // process request:
     (req, res, next) => {
         const errors = validationResult(req);

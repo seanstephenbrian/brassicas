@@ -18,11 +18,11 @@ block content
             select#species.form-input(type='select', placeholder='Select species' name='species' required='true' )
                 - if (species_list)
                     - species_list.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
-                    for singleSpecies in species_list
-                        if cultivar
-                            option(value=singleSpecies._id selected=(singleSpecies._id.toString()===cultivar.singleSpecies._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
-                        else
-                            option(value=singleSpecies._id) #{singleSpecies.name}
+                        for singleSpecies in species_list
+                            if cultivar
+                                option(value=singleSpecies._id selected=(singleSpecies._id.toString()===cultivar.singleSpecies._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
+                            else
+                                option(value=singleSpecies._id) #{singleSpecies.name}
         button(type='submit') Submit
 
     if errors
