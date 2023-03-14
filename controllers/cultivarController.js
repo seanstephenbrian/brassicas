@@ -132,13 +132,32 @@ exports.cultivar_create_post = [
 ];
 
 // display cultivar delete form on GET:
-exports.cultivar_delete_get = (req, res) => {
-    res.send('CULTIVAR DELETE GET');
+exports.cultivar_delete_get = (req, res, next) => {
+    Cultivar.findById(req.params.id)
+        .exec((err, found_cultivar) => {
+            if (err) {
+                return next(err);
+            }
+            if (found_cultivar === null) {
+                res.redirect('/inventory/cultivars');
+            }
+            res.render('cultivar_delete',
+                {
+                    title: 'Delete Cultivar',
+                    cultivar: found_cultivar
+                }
+            );
+        })
 }
 
 // handle cultivar delete on POST:
 exports.cultivar_delete_post = (req, res) => {
-    res.send('CULTIVAR DELETE POST');
+    Cultivar.findByIdAndRemove(req.body.cultivarid, (err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/inventory/cultivars');
+    });
 }
 
 // display cultivar update form on GET:

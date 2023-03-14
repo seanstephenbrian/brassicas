@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 #{title}: #{cultivar.name}
+
+    p Are you sure you want to delete this cultivar?
+
+    form(method='POST' action='')
+      div.form-group
+        input#cultivarid.form-control(type='hidden', name='cultivarid', required='true', value=cultivar._id)
+
+      button(type='submit') Delete
