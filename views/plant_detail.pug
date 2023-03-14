@@ -25,3 +25,5 @@ block content
         -   if (plant_data.in_stock)
             button(class='purchase-button')
                 a(href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
+        div(class='plant-delete')
+            a(href=plant_data.url + '/delete') Delete this plant

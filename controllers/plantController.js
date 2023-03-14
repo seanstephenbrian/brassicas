@@ -155,12 +155,32 @@ exports.plant_create_post = (req, res, next) => {
 
 // display plant delete form on GET:
 exports.plant_delete_get = (req, res) => {
-    res.send('PLANT DELETE GET');
+    Plant.findById(req.params.id)
+        .exec((err, found_plant) => {
+            if (err) {
+                return next(err);
+            }
+            if (found_plant === null) {
+                res.redirect('/inventory/plants');
+            }
+            res.render(
+                'plant_delete',
+                {
+                    title: 'Delete Plant',
+                    plant: found_plant
+                }
+            );
+        });
 }
 
 // handle plant delete on POST:
 exports.plant_delete_post = (req, res) => {
-    res.send('PLANT DELETE POST');
+    Plant.findByIdAndRemove(req.body.plantid, (err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/inventory/plants');
+    });
 }
 
 // display plant update form on GET:
