@@ -22,8 +22,7 @@ block content
                             if cultivar
                                 option(value=singleSpecies._id selected=(singleSpecies._id.toString()===cultivar.species._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
                             else
-                //- for singleSpecies in species_list
-                //-     option(value=singleSpecies._id) #{singleSpecies.name}
+                                option(value=singleSpecies._id) #{singleSpecies.name}
         button(type='submit') Submit
 
     if errors

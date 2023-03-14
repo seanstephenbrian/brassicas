@@ -33,7 +33,7 @@ block content
       div
         for flavor in flavors
           div
-            - if (plant.flavor.length > 0)
+            - if (plant && plant.flavor.length > 0)
                 input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=(flavor._id.toString()===plant.flavor[0]._id.toString() ? true : false))
             - else
                 input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=false)

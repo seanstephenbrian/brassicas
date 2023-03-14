@@ -7,20 +7,21 @@ html(lang='en')
         meta(name='viewport', content='width=device-width, initial-scale=1')
     body
         header
-            div(class='title') brassicaDB
+            div(class='title') 
+                a(href='/inventory') brassicaDB
         aside(class='sidebar')
             nav
                 ul(class='nav-list')
                     li
-                        a(href='/inventory') Home
+                        a(class='home-link' href='/inventory') Home
                     li
-                        a(href='/inventory/plants') Plant Varieties
+                        a(href='/inventory/plants') View Plant Varieties
                     li
-                        a(href='/inventory/species-list') Species
+                        a(href='/inventory/species-list') View Species
                     li
-                        a(href='/inventory/cultivars') Cultivars
+                        a(href='/inventory/cultivars') View Cultivars
                     li
-                        a(href='/inventory/flavors') Flavors
+                        a(href='/inventory/flavors') View Flavors
                     li 
                         a(href='/inventory/plant/create') Create New Plant Variety 
                     li 

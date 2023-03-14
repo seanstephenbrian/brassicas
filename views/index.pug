@@ -1,23 +1,23 @@
 extends layout
 
 block content
-    p Welcome to #[strong brassicaDB]! This demo web app built with Node.js, Express, and MongoDB.
+    p Welcome to #[strong brassicaDB], a demo web app built with Node.js, Express, and MongoDB.
     p #[strong brassicaDB] is an editable inventory of edible vegetables from the plant genus 
         a(href='https://en.wikipedia.org/wiki/Brassica' target='_blank' rel='noopener noreferrer') Brassica
         | .
     p Our collection can be filtered by variety, species, cultivar, and relevant flavor notes.
 
     section.inventory-stats
-        h1.inventory-title Inventory Stats:
+        h1.inventory-title Inventory Stats
         if error 
             p We're sorry, we encountered an error retrieving the data.
         else
-            ul 
-                li.inventory-list #[strong Plant Varieties:] 
+            ul.inventory-list 
+                li.inventory-list-item #[strong Varieties:] 
                     a(href='/inventory/plants') !{data.plantCount}
-                li.inventory-list #[strong Species:] 
+                li.inventory-list-item #[strong Species:] 
                     a(href='/inventory/species-list') !{data.speciesCount}
-                li.inventory-list #[strong Cultivars:] 
+                li.inventory-list-item #[strong Cultivars:] 
                     a(href='/inventory/cultivars') !{data.cultivarCount}
-                li.inventory-list #[strong Flavors:] 
+                li.inventory-list-item #[strong Flavors:] 
                     a(href='/inventory/flavors') !{data.flavorCount}

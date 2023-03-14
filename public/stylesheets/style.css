@@ -6,6 +6,8 @@
 
 :root {
     --rvv: calc(1rem + 1vmin + 1vmax);
+    --pink: #ff6da4;
+    --light-green: #00b672;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -29,6 +31,13 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+a,
+a:hover,
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
 ul, ol {
     list-style: none;
 }
@@ -47,12 +56,12 @@ body {
     background: rgb(0,146,91);
     background: linear-gradient(143deg, rgba(0,146,91,0.8295912114845938) 0%, rgba(0,182,114,0.7651654411764706) 100%);
     font-size: calc(0.45*var(--rvv));
-    padding: 50px;
+    padding: 30px 50px;
     font-family: 'Fira Mono';
     display: grid;
     grid-template-rows: 100px 1fr 100px;
     grid-template-columns: 150px 1fr;
-    column-gap: calc(3*var(--rvv));
+    column-gap: calc(2*var(--rvv));
     grid-template-areas:
         "header header"
         "sidebar main"
@@ -71,13 +80,36 @@ header {
 
 .sidebar {
     grid-area: sidebar;
+    background-color: rgba(255, 255, 255, 0.685);
+    height: fit-content;
+    padding: 20px 10px;
+    border-radius: 5px;
 }
 
 .nav-list {
     font-size: 1rem;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 15px;
+}
+
+.nav-list li {
+    width: 100%;
+    text-align: center;
+}
+
+.nav-list a,
+.nav-list a:visited {
+    transition: text-shadow 0.1s ease-in-out;
+}
+
+.nav-list a:hover {
+    text-shadow: var(--pink) 0 0 3px;
+}
+
+.home-link {
+    font-size: 1.3rem;
 }
 
 main {
@@ -102,12 +134,79 @@ footer {
 /* index page */
 
 .inventory-stats {
-    margin-top: calc(0.5*var(--rvv));
+    font-size: 1rem;
+    margin-top: 30px;
+    min-width: 400px;
+    width: 25%;
+    max-width: 600px;
+    padding: 30px 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.453);
 }
 
 .inventory-title {
-    font-size: calc(0.8*var(--rvv));
-    margin-bottom: calc(0.5*var(--rvv));
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.inventory-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
+}
+
+.inventory-list-item a,
+.inventory-list-item a:visited {
+    text-decoration: underline;
+    transition: text-shadow 0.1s ease-in-out;
+}
+
+.inventory-list-item a:hover {
+    text-shadow: var(--pink) 0 0 3px;
+}
+
+@media screen and (max-width: 800px) {
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        margin: 20px 0;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;       
+        gap: 30px;
+        padding: 0 15px;
+    }
+    
+    .nav-list li {
+        width: 45%;
+        text-align: center;
+    }
+
+    .nav-list li:first-child {
+        width: 100%;
+    }
+
+    .inventory-stats {
+        align-self: center;
+        padding: 20px;
+        min-width: 0;
+        width: auto;
+        max-width: 80%;
+        flex-direction: column;
+    }
 }
