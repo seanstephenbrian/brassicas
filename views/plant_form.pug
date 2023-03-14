@@ -31,7 +31,7 @@ block content
     div.form-section
       label Flavors:
       div
-        for flavor, index in flavors
+        for flavor in flavors
           div
             input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=flavor.checked )
             label(for=flavor._id) #{flavor.flavor}

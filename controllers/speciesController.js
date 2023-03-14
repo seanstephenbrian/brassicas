@@ -70,7 +70,6 @@ exports.species_create_post = [
 
         // if there are errors, re-render the form:
         if(!errors.isEmpty()) {
-            console.log(errors)
             res.render(
                 'species_form',
                 {
@@ -81,7 +80,6 @@ exports.species_create_post = [
             return;
         // otherwise if successful:
         } else {
-            console.log('no error')
             Species.findOne({ name: req.body.name })
                 .exec((err, found_species) => {
                     if (err) {

@@ -120,25 +120,26 @@ exports.plant_create_post = (req, res, next) => {
     }
 
     // control for form submissions with no flavor specified:
-    let flavorInput;
+    let newPlantDetails;
 
-    if (req.body.flavor === undefined) {
-        flavorInput = '';
+    if (req.body.flavor === undefined || req.body.flavor === '') {
+        newPlantDetails = {
+            name: req.body.name,
+            species: req.body.species,
+            cultivar: req.body.cultivars,
+            description: req.body.description,
+            in_stock: inStockStatus
+        }
     } else {
-        flavorInput = req.body.flavor;
+        newPlantDetails = {
+            name: req.body.name,
+            species: req.body.species,
+            cultivar: req.body.cultivars,
+            description: req.body.description,
+            flavor: req.body.flavor,
+            in_stock: inStockStatus
+        }
     }
-
-    console.log(flavorInput);
-
-    const newPlantDetails = {
-        name: req.body.name,
-        species: req.body.species,
-        cultivar: [req.body.cultivars],
-        description: req.body.description,
-        flavor: [flavorInput],
-        in_stock: inStockStatus
-    }
-
 
     const newPlant = new Plant(newPlantDetails);
 

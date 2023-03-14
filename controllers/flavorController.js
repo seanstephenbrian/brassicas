@@ -40,7 +40,6 @@ exports.flavor_detail = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            console.log(results.flavorPlants);
             res.render(
                 'flavor_detail', 
                 {
