@@ -11,5 +11,7 @@ block content
                     each plant in flavor_plants 
                         li 
                             a(href=plant.url) #{plant.name}
+        div(class='flavor-update')
+            a(href=flavor_data.url + '/update') Update this flavor
         div(class='flavor-delete')
             a(href=flavor_data.url + '/delete') Delete this flavor

@@ -132,11 +132,61 @@ exports.flavor_delete_post = (req, res) => {
 }
 
 // display flavor update form on GET:
-exports.flavor_update_get = (req, res) => {
-    res.send('FLAVOR UPDATE GET');
+exports.flavor_update_get = (req, res, next) => {
+    Flavor.findById(req.params.id)
+        .exec((err, found_flavor) => {
+            if (err) {
+                return next(err);
+            }
+            if (found_flavor == null) {
+                const error = new Error('Flavor not found');
+                error.status = 404;
+                return next(error);
+            } 
+            // success.. render the form:
+            res.render(
+                'flavor_form',
+                {
+                    title: 'Update Flavor',
+                    flavor: found_flavor
+                }
+            );
+        });
 }
 
 // handle flavor update on POST:
-exports.flavor_update_post = (req, res) => {
-    res.send('FLAVOR UPDATE POST');
-}
+exports.flavor_update_post = [
+    // validate & sanitize input:
+    body('flavor', 'Flavor name is required').trim().isLength({ min: 1 }).escape(),
+    // process request:
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        const flavor = new Flavor({
+            flavor: req.body.flavor,
+            _id: req.params.id
+        });
+
+        // if there are validation errors, re-render the form:
+        if (!errors.isEmpty()) {
+            res.render(
+                'flavor_form',
+                {
+                    title: 'Update Flavor',
+                    flavor: flavor,
+                    errors: errors.array()
+                }
+            );
+        // otherwise if successful...
+        } else {
+            Flavor.findByIdAndUpdate(req.params.id, flavor, {}, (err, updatedFlavor) => {
+                if (err) {
+                    return next(err);
+                }
+
+                // successful: redirect to flavor detail page:
+                res.redirect(updatedFlavor.url);
+            });
+        }
+    }
+]

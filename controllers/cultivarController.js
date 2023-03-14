@@ -207,7 +207,6 @@ exports.cultivar_update_post = [
             _id: req.params.id
         });
 
-
         // if there are validation errors, re-render the form:
         if (!errors.isEmpty()) {
             // get the species list again:
@@ -230,14 +229,13 @@ exports.cultivar_update_post = [
             return;
         // otherwise if successful:
         } else {
-            // check if cultivar with same name already exists:
-            Cultivar.findByIdAndUpdate(req.params.id, cultivar, {}, (err, theCultivar) => {
+            Cultivar.findByIdAndUpdate(req.params.id, cultivar, {}, (err, updatedCultivar) => {
                 if (err) {
                     return next(err);
                 }
 
                 // successful: redirect to cultivar detail page:
-                res.redirect(theCultivar.url);
+                res.redirect(updatedCultivar.url);
             }); 
         }
     }
