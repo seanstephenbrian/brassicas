@@ -97,12 +97,15 @@ exports.plant_create_get = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            res.render('plant_form', {
-                title: 'Add a New Plant to brassicaDB',
-                species: results.species,
-                cultivars: results.cultivars,
-                flavors: results.flavors
-            });
+            res.render(
+                'plant_form', 
+                {
+                    title: 'Add a New Plant to brassicaDB',
+                    species: results.species,
+                    cultivars: results.cultivars,
+                    flavors: results.flavors
+                }
+            );
         }
     );
 }
@@ -113,7 +116,7 @@ exports.plant_create_post = (req, res, next) => {
     // convert in_stock to boolean:
     let inStockStatus;
 
-    if (req.body.in_stock === 'true') {
+    if (req.body.in_stock === 'true' || req.body.in_stock === true) {
         inStockStatus = true;
     } else {
         inStockStatus = false;
@@ -184,11 +187,136 @@ exports.plant_delete_post = (req, res) => {
 }
 
 // display plant update form on GET:
-exports.plant_update_get = (req, res) => {
-    res.send('PLANT UPDATE GET');
+exports.plant_update_get = (req, res, next) => {
+    // get all species, cultivar, and flavors:
+    async.parallel(
+        {
+            species(callback) {
+                Species.find(callback);
+            },
+            cultivars(callback) {
+                Cultivar.find(callback);
+            },
+            flavors(callback) {
+                Flavor.find(callback);
+            }
+        },
+        (err, results) => {
+            if (err) {
+                return next(err);
+            }
+            Plant.findById(req.params.id)
+                .exec((err, found_plant) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    if (found_plant == null) {
+                        const error = new Error('Plant not found');
+                        error.status = 404;
+                        return next(error);
+                    }
+                    // success... render the form:
+                    res.render(
+                        'plant_form',
+                        {
+                            title: 'Update Plant',
+                            plant: found_plant,
+                            species: results.species,
+                            cultivars: results.cultivars,
+                            flavors: results.flavors
+                        }
+                    );
+                });
+        }
+    )
 }
 
 // handle plant update on POST:
-exports.plant_update_post = (req, res) => {
-    res.send('PLANT UPDATE POST');
-}
+exports.plant_update_post = [
+    // validate & sanitize input:
+    body('name', 'Plant name is required').trim().isLength({ min: 1, max: 100 }).escape(),
+    body('description', 'Description is required').trim().isLength({ min: 1 }).escape(),
+    // process request:
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        let inStockStatus;
+
+        if (req.body.in_stock === 'true') {
+            inStockStatus = true;
+        } else {
+            inStockStatus = false;
+        }
+
+        let updatedPlantDetails;
+
+        if (req.body.flavor === undefined || req.body.flavor === '') {
+            updatedPlantDetails = {
+                name: req.body.name,
+                species: req.body.species,
+                cultivar: req.body.cultivars,
+                description: req.body.description,
+                in_stock: inStockStatus,
+                _id: req.params.id
+            }
+        } else {
+            updatedPlantDetails = {
+                name: req.body.name,
+                species: req.body.species,
+                cultivar: req.body.cultivars,
+                description: req.body.description,
+                flavor: req.body.flavor,
+                in_stock: inStockStatus,
+                _id: req.params.id
+            }
+        }
+
+        console.log(updatedPlantDetails);
+
+        const updatedPlant = new Plant(updatedPlantDetails);
+
+        // if there are validation errors, retrieve the species, cultivars, & flavors then re-render the form:
+        if (!errors.isEmpty()) {
+            async.parallel(
+                {
+                    species(callback) {
+                        Species.find(callback);
+                    },
+                    cultivars(callback) {
+                        Cultivar.find(callback);
+                    },
+                    flavors(callback) {
+                        Flavor.find(callback);
+                    }
+                },
+                (err, results) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    
+                    // re-render the form:
+                    res.render(
+                        'plant_form',
+                        {
+                            title: 'Update Plant',
+                            plant: updatedPlant,
+                            species: results.species,
+                            cultivars: results.cultivars,
+                            flavors: results.flavors
+                        }
+                    );  
+                }
+            )
+        // otherwise if successful...
+        } else {
+            Plant.findByIdAndUpdate(req.params.id, updatedPlant, {}, (err, updatedPlantItself) => {
+                if (err) {
+                    return next(err);
+                }
+
+                // successful - redirect to plant detail page:
+                res.redirect(updatedPlantItself.url);
+            })
+        }
+    }
+]

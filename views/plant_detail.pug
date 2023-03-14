@@ -5,6 +5,7 @@ block content
 
     div(class='plant-info')
         div(class='plant-name') #{plant_data.name}
+        div(class='plant-description') #{plant_data.description}
         div(class='plant-classification')
             - if (plant_data.species)
                 div(class='plant-species') Species: 
@@ -28,5 +29,7 @@ block content
         -   if (plant_data.in_stock)
             button(class='purchase-button')
                 a(href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
+        div(class='plant-update')
+            a(href=plant_data.url + '/update') Update this plant
         div(class='plant-delete')
             a(href=plant_data.url + '/delete') Delete this plant

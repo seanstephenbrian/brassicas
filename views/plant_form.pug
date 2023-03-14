@@ -5,7 +5,7 @@ block content
 
   form(method='POST' action='')
     div.form-section
-      label(for='name') New Plant Name:
+      label(for='name') Plant Name:
       input#name.form-input(type='text', placeholder='Name of plant' name='name' required='true' value=(undefined===plant ? '' : plant.name) )
     div.form-section
       label(for='species') Species:
@@ -13,7 +13,7 @@ block content
         - species.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for singleSpecies in species
           if plant
-            option(value=singleSpecies._id selected=(singleSpecies._id.toString()===plant.singleSpecies._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
+            option(value=singleSpecies._id selected=(singleSpecies._id.toString()===plant.species._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
           else
             option(value=singleSpecies._id) #{singleSpecies.name}
     div.form-section
@@ -22,7 +22,7 @@ block content
         - cultivars.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for cultivar in cultivars
           if plant
-            option(value=cultivar._id selected=(cultivar._id.toString()===plant.cultivar._id.toString() ? 'selected' : false) ) #{cultivar.name}
+            option(value=cultivar._id selected=(cultivar._id.toString()===plant.cultivar[0]._id.toString() ? 'selected' : false) ) #{cultivar.name}
           else
             option(value=cultivar._id) #{cultivar.name}
     div.form-section
@@ -33,12 +33,18 @@ block content
       div
         for flavor in flavors
           div
-            input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=flavor.checked )
+            - if (plant.flavor.length > 0)
+                input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=(flavor._id.toString()===plant.flavor[0]._id.toString() ? true : false))
+            - else
+                input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=false)
             label(for=flavor._id) #{flavor.flavor}
     div.form-section
         label In Stock?
         div
-            input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked )
+            if plant
+                input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked=(plant.in_stock.toString()==='true' ? true : false) )
+            else 
+                input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked=false)
             label(for='in_stock') Yes
     button(type='submit') Submit
 
