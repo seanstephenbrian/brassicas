@@ -14,3 +14,5 @@ block content
                     each plant in species_plants 
                         li 
                             a(href=plant.url) #{plant.name}
+        div(class='species-delete')
+            a(href=species_data.url + '/delete') Delete this species

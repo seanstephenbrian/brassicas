@@ -102,13 +102,33 @@ exports.species_create_post = [
 ]
 
 // display species delete form on GET:
-exports.species_delete_get = (req, res) => {
-    res.send('SPECIES DELETE GET');
+exports.species_delete_get = (req, res, next) => {
+    Species.findById(req.params.id)
+        .exec((err, found_species) => {
+            if (err) {
+                return next(err);
+            }
+            if (found_species === null) {
+                res.redirect('/inventory/species-list');
+            }
+            res.render(
+                'species_delete',
+                {
+                    title: 'Delete Species',
+                    species: found_species
+                }
+            );
+        });
 }
 
 // handle species delete on POST:
 exports.species_delete_post = (req, res) => {
-    res.send('SPECIES DELETE POST');
+    Species.findByIdAndRemove(req.body.speciesid, (err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/inventory/species-list');
+    })
 }
 
 // display species update form on GET:

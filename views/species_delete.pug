@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 #{title}: #{species.name}
+
+    p Are you sure you want to delete this species?
+
+    form(method='POST' action='')
+      div.form-group
+        input#speciesid.form-control(type='hidden', name='speciesid', required='true', value=species._id)
+
+      button(type='submit') Delete
