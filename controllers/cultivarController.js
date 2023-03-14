@@ -141,13 +141,14 @@ exports.cultivar_delete_get = (req, res, next) => {
             if (found_cultivar === null) {
                 res.redirect('/inventory/cultivars');
             }
-            res.render('cultivar_delete',
+            res.render(
+                'cultivar_delete',
                 {
                     title: 'Delete Cultivar',
                     cultivar: found_cultivar
                 }
             );
-        })
+        });
 }
 
 // handle cultivar delete on POST:

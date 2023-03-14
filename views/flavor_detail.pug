@@ -5,8 +5,11 @@ block content
 
     div(class='flavor-info')
         div(class='flavor-name') #{flavor_data.flavor}
-        div(class='flavor-plants') Plant varieties with this flavor note:
-            ul
-                each plant in flavor_plants 
-                    li 
-                        a(href=plant.url) #{plant.name}
+        - if (flavor_plants.length > 0)
+            div(class='flavor-plants') Plant varieties with this flavor note:
+                ul
+                    each plant in flavor_plants 
+                        li 
+                            a(href=plant.url) #{plant.name}
+        div(class='flavor-delete')
+            a(href=flavor_data.url + '/delete') Delete this flavor

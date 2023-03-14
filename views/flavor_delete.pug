@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 #{title}: #{flavor.flavor}
+
+    p Are you sure you want to delete this flavor?
+
+    form(method='POST' action='')
+      div.form-group
+        input#flavorid.form-control(type='hidden', name='flavorid', required='true', value=flavor._id)
+
+      button(type='submit') Delete

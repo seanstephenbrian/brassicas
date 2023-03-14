@@ -103,12 +103,32 @@ exports.flavor_create_post = [
 
 // display flavor delete form on GET:
 exports.flavor_delete_get = (req, res) => {
-    res.send('FLAVOR DELETE GET');
+    Flavor.findById(req.params.id)
+        .exec((err, found_flavor) => {
+            if (err) {
+                return next(err);
+            }
+            if (found_flavor === null) {
+                res.redirect('/inventory/flavors');
+            }
+            res.render(
+                'flavor_delete',
+                {
+                    title: 'Delete Flavor',
+                    flavor: found_flavor
+                }
+            );
+        });
 }
 
 // handle flavor delete on POST:
 exports.flavor_delete_post = (req, res) => {
-    res.send('FLAVOR DELETE POST');
+    Flavor.findByIdAndRemove(req.body.flavorid, (err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/inventory/flavors');
+    });
 }
 
 // display flavor update form on GET:
