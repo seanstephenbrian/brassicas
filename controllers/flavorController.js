@@ -2,6 +2,7 @@ const Flavor = require('../models/flavor');
 const Plant = require('../models/plant');
 
 const async = require('async');
+const { body, validationResult } = require("express-validator");
 
 // display all flavors:
 exports.flavor_list = function(req, res, next) {
@@ -55,13 +56,52 @@ exports.flavor_detail = (req, res, next) => {
 
 // display author create form on GET:
 exports.flavor_create_get = (req, res) => {
-    res.send('FLAVOR CREATE GET');
+    res.render('flavor_form', { title: 'Create a New Flavor' });
 }
 
 // handle author create on POST:
-exports.flavor_create_post = (req, res) => {
-    res.send('FLAVOR CREATE POST');
-}
+exports.flavor_create_post = [
+    // validate & sanitize:
+    body('flavor', 'New flavor name required').trim().isLength({ min: 1 }).escape(),
+    // process requests:
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        const flavor = new Flavor({ flavor: req.body.flavor });
+
+        // if there are errors, re-render the form:
+        if(!errors.isEmpty()) {
+            res.render(
+                'flavor_form', 
+                {
+                    title: 'Create a New Flavor',
+                    flavor: flavor
+                }
+            );
+            return;
+        // otherwise if successful:
+        } else {
+            Flavor.findOne({ flavor: req.body.flavor })
+                .exec((err, found_flavor) => {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    if (found_flavor) {
+                        res.redirect(found_flavor.url);
+                    } else {
+                        flavor.save((err) => {
+                            if (err) {
+                                return next(err);
+                            }
+                            res.redirect(flavor.url);
+                        });
+                    }
+                }
+            );
+        }
+    }
+]
 
 // display flavor delete form on GET:
 exports.flavor_delete_get = (req, res) => {

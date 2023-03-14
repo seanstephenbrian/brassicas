@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    h1 #{title}
+
+    form(method='POST' action='')
+        div.form-section
+            label(for='name') New Flavor Name:
+            input#name.form-input(
+                type='text',
+                placeholder='Name of flavor',
+                name='flavor',
+                required='true',
+                value=(undefined === flavor ? '' : flavor.flavor)
+            )
+        button(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

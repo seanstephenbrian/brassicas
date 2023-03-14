@@ -125,7 +125,8 @@ exports.cultivar_create_post = [
                             res.redirect(cultivar.url);
                         });
                     }
-            });
+                }
+            );
         }
     }
 ];
