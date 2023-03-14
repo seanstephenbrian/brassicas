@@ -97,8 +97,7 @@ exports.flavor_create_post = [
                             res.redirect(flavor.url);
                         });
                     }
-                }
-            );
+                });
         }
     }
 ]

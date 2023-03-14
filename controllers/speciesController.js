@@ -2,6 +2,7 @@ const Species = require('../models/species');
 const Plant = require('../models/plant');
 
 const async = require('async');
+const { body, validationResult } = require("express-validator");
 
 // display all species:
 exports.species_list = function(req, res, next) {
@@ -53,13 +54,54 @@ exports.species_detail = (req, res, next) => {
 
 // display author create form on GET:
 exports.species_create_get = (req, res) => {
-    res.send('SPECIES CREATE GET');
+    res.render('species_form', { title: 'Create a New Species' });
 }
 
 // handle author create on POST:
-exports.species_create_post = (req, res) => {
-    res.send('SPECIES CREATE POST');
-}
+exports.species_create_post = [
+    // validate & sanitize:
+    body('name', 'New species name required').trim().isLength({ min: 1 }).escape(),
+    body('description').trim().escape(),
+    //  process requests:
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        const species = new Species({ name: req.body.name, description: req.body.description });
+
+        // if there are errors, re-render the form:
+        if(!errors.isEmpty()) {
+            console.log(errors)
+            res.render(
+                'species_form',
+                {
+                    title: 'Create a New Species',
+                    species: species
+                }
+            );
+            return;
+        // otherwise if successful:
+        } else {
+            console.log('no error')
+            Species.findOne({ name: req.body.name })
+                .exec((err, found_species) => {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    if (found_species) {
+                        res.redirect(found_species.url);
+                    } else {
+                        species.save((err) => {
+                            if (err) {
+                                return next(err);
+                            }
+                            res.redirect(species.url);
+                        });
+                    }
+                });
+        }
+    }
+]
 
 // display species delete form on GET:
 exports.species_delete_get = (req, res) => {

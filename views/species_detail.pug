@@ -8,8 +8,9 @@ block content
         div(class='species-description') 
             div(class='species-description-label') Description:
             div(class='species-description-body') #{species_data.description}
-        div(class='species-plants') Plant varieties in this species:
-            ul
-                each plant in species_plants 
-                    li 
-                        a(href=plant.url) #{plant.name}
+        - if (species_plants.length > 0)
+            div(class='species-plants') Plant varieties in this species:
+                ul
+                    each plant in species_plants 
+                        li 
+                            a(href=plant.url) #{plant.name}
