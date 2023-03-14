@@ -7,7 +7,11 @@ block content
         each plant in plant_list 
             li 
                 a(href=plant.url) #{plant.name}
-                span(class='species-detail') (#{plant.species.name} var. #{plant.cultivar_list})
+                - if (plant.species)
+                    - if (plant.cultivar_list)
+                        span(class='species-detail') (#{plant.species.name} var. #{plant.cultivar_list})
+                    - else 
+                        span(class='species-detail') (#{plant.species.name}) 
                 -
                     let stockStatus;
                     if (plant.in_stock) {

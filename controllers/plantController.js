@@ -160,7 +160,7 @@ exports.plant_delete_get = (req, res) => {
             if (err) {
                 return next(err);
             }
-            if (found_plant === null) {
+            if (found_plant == null) {
                 res.redirect('/inventory/plants');
             }
             res.render(

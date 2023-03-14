@@ -108,7 +108,7 @@ exports.species_delete_get = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            if (found_species === null) {
+            if (found_species == null) {
                 res.redirect('/inventory/species-list');
             }
             res.render(

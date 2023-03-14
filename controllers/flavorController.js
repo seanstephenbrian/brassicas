@@ -108,7 +108,7 @@ exports.flavor_delete_get = (req, res) => {
             if (err) {
                 return next(err);
             }
-            if (found_flavor === null) {
+            if (found_flavor == null) {
                 res.redirect('/inventory/flavors');
             }
             res.render(

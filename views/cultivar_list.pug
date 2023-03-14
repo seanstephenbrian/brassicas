@@ -5,8 +5,12 @@ block content
 
     ul 
         each cultivar in cultivar_list 
-            li 
-                a(href=cultivar.url) #{cultivar.name}
-                span(class='species-detail') (#{cultivar.species.name})
+            - if (cultivar.species)
+                li 
+                    a(href=cultivar.url) #{cultivar.name}
+                    span(class='species-detail') (#{cultivar.species.name})
+            - if (!cultivar.species)
+                li 
+                    a(href=cultivar.url) #{cultivar.name}
         else 
             li There are no cultivars.

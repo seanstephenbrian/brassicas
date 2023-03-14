@@ -5,12 +5,16 @@ block content
 
     div(class='cultivar-info')
         div(class='cultivar-name') #{cultivar_data.name}
-        div(class='cultivar-species') Species: 
-            a(href=cultivar_data.species.url) #{cultivar_data.species.name}
-        div(class='cultivar-plants') Plant varieties in this cultivar:
-            ul
-                each plant in cultivar_plants 
-                    li 
-                        a(href=plant.url) #{plant.name}
+        - if (cultivar_data.species)
+            div(class='cultivar-species') Species: 
+                a(href=cultivar_data.species.url) #{cultivar_data.species.name}
+        - if (cultivar_plants.length > 0)
+            div(class='cultivar-plants') Plant varieties in this cultivar:
+                ul
+                    each plant in cultivar_plants 
+                        li 
+                            a(href=plant.url) #{plant.name}
+        div(class='cultivar-update')
+            a(href=cultivar_data.url + '/update') Update this cultivar
         div(class='cultivar-delete')
             a(href=cultivar_data.url + '/delete') Delete this cultivar
