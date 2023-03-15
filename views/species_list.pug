@@ -1,9 +1,14 @@
 extends layout 
 
 block content 
-    ul 
+    h1.list-title All Species
+    ul.page-list
         each species in species_list
-            li 
-                a(href=species.url) #{species.name}
+            li.species-item
+                div.species-name
+                    a(href=species.url) #{species.name}
+                div.species-description #{species.description}
+                div.species-link
+                    a(href=species.url) View full details
         else 
-            li There are no species.
+            li.species-item There are no species.

@@ -6,7 +6,7 @@ const { body, validationResult } = require("express-validator");
 
 // display all species:
 exports.species_list = function(req, res, next) {
-    Species.find({}, "name")
+    Species.find({}, "name description")
         .sort({ name: 1 })
         .exec(function (err, list_species) {
             if (err) {
