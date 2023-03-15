@@ -54,7 +54,7 @@ exports.species_detail = (req, res, next) => {
 
 // display author create form on GET:
 exports.species_create_get = (req, res) => {
-    res.render('species_form', { title: 'Create a New Species' });
+    res.render('species_form', { title: 'Add a New Species to brassicaDB' });
 }
 
 // handle author create on POST:

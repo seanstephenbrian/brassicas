@@ -3,8 +3,8 @@ extends layout
 block content 
     h1 #{title}
 
-    form(method='POST' action='')
-        div.form-section
+    form(class='species-form' method='POST' action='')
+        div.form-section.name-section
             label(for='name') New Species Name:
             input#name.form-input(
                 type='text',
@@ -13,11 +13,13 @@ block content
                 required='true',
                 value=(undefined === species ? '' : species.name)
             )
-        div.form-section
+        div.form-section.description-section
             label(for='description') Description: 
             textarea#description.form-input(
-                name='description'
-                value=(undefined === species ? '' : species.description)
+                name='description',
+                value=(undefined === species ? '' : species.description),
+                required='true',
+                placeholder='Enter a species description here.'
             )
         button(type='submit') Submit
 

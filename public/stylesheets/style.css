@@ -237,7 +237,9 @@ footer {
 
 .plant-form input,
 .plant-form select,
-.plant-form textarea {
+.plant-form textarea,
+.species-form input,
+.species-form textarea {
     background-color: rgba(237, 237, 237, 0.849);
     border: none;
     font-family: 'Fira Mono';
@@ -245,14 +247,18 @@ footer {
 
 .plant-form input:not(.checkbox-input):focus,
 .plant-form select:focus,
-.plant-form textarea:focus {
+.plant-form textarea:focus,
+.species-form input:focus,
+.species-form textarea:focus {
     outline: 2px solid var(--pink);
     background-color: rgb(255, 236, 243);
 }
 
 .plant-form input:not(.checkbox-input):not(::placeholder):invalid,
 .plant-form select:invalid,
-.plant-form textarea:not(::placeholder):invalid {
+.plant-form textarea:not(::placeholder):invalid,
+.species-form input:not(::placeholder):invalid,
+.species-form textarea:not(::placeholder):invalid {
     outline: 2px solid rgb(255, 153, 0);
     background-color: rgb(255, 232, 197);
 }
@@ -315,7 +321,8 @@ footer {
     font-size: calc(0.5*var(--rvv));
 }
 
-.plant-form button {
+.plant-form button,
+.species-form button {
     font-size: calc(0.5*var(--rvv));
     padding: 10px;
     border-radius: 3px;
@@ -353,11 +360,48 @@ footer {
     align-self: flex-end;
 }
 
-/* cultivar list view */
+/* species form */
 
-.cultivar-list {
-    
+.species-form {
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.453);
+    border-radius: 5px;
 }
+
+.species-form textarea {
+    height: 50px;
+    resize: none;
+}
+
+.species-form .form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    grid-template-areas: "species-form-label species-form-input";
+}
+
+.species-form label {
+    grid-area: species-form-label;
+    font-size: calc(0.6*var(--rvv));
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: end;
+}
+
+.species-form input {
+    grid-area: species-form-input;
+}
+
+.species-form #name {
+    height: 30px;
+}
+
+/* cultivar list view */
 
 .cultivar-item {
     max-width: 700px;
