@@ -3,11 +3,11 @@ extends layout
 block content
   h1= title
 
-  form(method='POST' action='')
-    div.form-section
+  form(class='plant-form' method='POST' action='')
+    div.form-section.name-section
       label(for='name') Plant Name:
       input#name.form-input(type='text', placeholder='Name of plant' name='name' required='true' value=(undefined===plant ? '' : plant.name) )
-    div.form-section
+    div.form-section.species-section
       label(for='species') Species:
       select#species.form-input(type='select', placeholder='Select species' name='species' required='true' )
         - species.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
@@ -16,7 +16,7 @@ block content
             option(value=singleSpecies._id selected=(singleSpecies._id.toString()===plant.species._id.toString() ? 'selected' : false) ) #{singleSpecies.name}
           else
             option(value=singleSpecies._id) #{singleSpecies.name}
-    div.form-section
+    div.form-section.cultivar-section
       label(for='cultivars') Cultivar:
       select#cultivars.form-input(type='select', placeholder='Select cultivars' name='cultivars' required='true' )
         - cultivars.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
@@ -25,27 +25,27 @@ block content
             option(value=cultivar._id selected=(cultivar._id.toString()===plant.cultivar[0]._id.toString() ? 'selected' : false) ) #{cultivar.name}
           else
             option(value=cultivar._id) #{cultivar.name}
-    div.form-section
+    div.form-section.description-section
       label(for='description') Description:
       textarea#description.form-input(type='textarea', placeholder='Description' name='description' required='true') #{undefined===plant ? '' : plant.description}
-    div.form-section
-      label Flavors:
-      div
+    div.form-section.flavor-section
+      label.flavor-label.main-flavor-label Flavors
+      div.flavor-options
         for flavor in flavors
-          div
+          div.flavor-option
             - if (plant && plant.flavor.length > 0)
-                input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=(flavor._id.toString()===plant.flavor[0]._id.toString() ? true : false))
+                input.flavor-input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=(flavor._id.toString()===plant.flavor[0]._id.toString() ? true : false))
             - else
-                input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=false)
-            label(for=flavor._id) #{flavor.flavor}
-    div.form-section
+                input.flavor-input.checkbox-input(type='checkbox', name='flavor', id=flavor._id, value=flavor._id, checked=false)
+            label(class='flavor-label' for=flavor._id) #{flavor.flavor}
+    div.form-section.stock-section
         label In Stock?
-        div
+        div.stock-checkbox
             if plant
                 input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked=(plant.in_stock.toString()==='true' ? true : false) )
             else 
                 input.checkbox-input(type='checkbox', name='in_stock', id='in_stock', value='true', checked=false)
-            label(for='in_stock') Yes
+            label(class='yes-label' for='in_stock') Yes
     button(type='submit') Submit
 
   if errors
