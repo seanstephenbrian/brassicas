@@ -1,22 +1,34 @@
 extends layout 
 
-block content 
-    ul 
+block content
+    h1.list-title All Plant Varieties
+    ul.page-list 
+        li.plant-item.demo-item 
+            div.plant-name Common Name
+            div.plant-species Species/Cultivar
+            div.plant-stock In Stock?
         each plant in plant_list 
-            li 
-                a(href=plant.url) #{plant.name}
-                - if (plant.species)
-                    - if (plant.cultivar_list)
-                        span(class='species-detail') (#{plant.species.name} var. #{plant.cultivar_list})
-                    - else 
-                        span(class='species-detail') (#{plant.species.name}) 
-                -
-                    let stockStatus;
-                    if (plant.in_stock) {
-                        stockStatus = 'Available';
-                    } else {
-                        stockStatus = 'Not Available';
-                    }
-                span(class='stock-status') [#{stockStatus}]
+            li.plant-item 
+                div.plant-name
+                    a(href=plant.url) #{plant.name}
+                div.plant-species
+                    - if (plant.species)
+                        - if (plant.cultivar_list)
+                            span(class='species-detail') 
+                                a(href=plant.species.url) #{plant.species.name}
+                                |  var. 
+                                a(href=plant.cultivar[0].url) #{plant.cultivar_list}
+                        - else 
+                            span(class='species-detail') 
+                                a(href=plant.species.url) #{plant.species.name}
+                div.plant-stock
+                    -
+                        let stockStatus;
+                        if (plant.in_stock) {
+                            stockStatus = 'Available';
+                        } else {
+                            stockStatus = 'Not Available';
+                        }
+                    span(class='stock-status') #{stockStatus}
         else 
             li There are no plants.

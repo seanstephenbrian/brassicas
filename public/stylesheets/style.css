@@ -34,8 +34,13 @@ time, mark, audio, video {
 a,
 a:hover,
 a:visited {
-    text-decoration: none;
     color: black;
+    text-decoration: underline;
+    transition: text-shadow 0.1s ease-in-out;
+}
+
+a:hover {
+    text-shadow: var(--pink) 0 0 3px;
 }
 
 ul, ol {
@@ -74,8 +79,16 @@ header {
     gap: 10vw;
 }
 
-.title {
+.site-title {
     font-size: 50px;
+}
+
+.site-title a {
+    text-decoration: none;
+}
+
+.site-title a:hover {
+    text-shadow: none;
 }
 
 .sidebar {
@@ -101,11 +114,7 @@ header {
 
 .nav-list a,
 .nav-list a:visited {
-    transition: text-shadow 0.1s ease-in-out;
-}
-
-.nav-list a:hover {
-    text-shadow: var(--pink) 0 0 3px;
+    text-decoration: none;
 }
 
 .home-link {
@@ -171,6 +180,50 @@ footer {
 
 .inventory-list-item a:hover {
     text-shadow: var(--pink) 0 0 3px;
+}
+
+/* general list view styles: */
+
+.list-title {
+    font-size: calc(0.8*var(--rvv));
+}
+
+.page-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(0.3*var(--rvv));
+}
+
+/* plant list view */
+
+.plant-item {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 0.8fr 1fr 0.5fr;
+    column-gap: 20px;
+    grid-template-areas: "plant-name plant-species plant-stock";
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.453);
+    padding: 5px 10px;
+}
+
+.demo-item {
+    font-size: calc(0.6*var(--rvv));
+    background-color: rgba(255, 255, 255, 0.685);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.plant-name {
+    grid-area: plant-name;
+}
+
+.plant-species {
+    grid-area: plant-species;
+}
+
+.plant-stock {
+    grid-area: plant-stock;
 }
 
 @media screen and (max-width: 800px) {
