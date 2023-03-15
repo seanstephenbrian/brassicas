@@ -1,9 +1,11 @@
 extends layout 
 
 block content 
-    ul 
+    h1.list-title All Flavors
+    p Click a flavor tag to view all associated plant varieties.
+    ul.flavor-list 
         each flavor in flavor_list
-            li 
+            li.flavor-item
                 a(href=flavor.url) #{flavor.flavor}
         else 
-            li There are no flavors.
+            li.flavor-item There are no flavors.
