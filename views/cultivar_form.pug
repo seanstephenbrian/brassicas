@@ -3,8 +3,8 @@ extends layout
 block content 
     h1 #{title}
 
-    form(method='POST' action='')
-        div.form-section
+    form(class='cultivar-form' method='POST' action='')
+        div.form-section.name-section
             label(for='name') New Cultivar Name:
             input#name.form-input(
                 type='text',
@@ -13,8 +13,8 @@ block content
                 required='true',
                 value=(undefined === cultivar ? '' : cultivar.name)
             )
-        div.form-section
-            label(for='species') Species:
+        div.form-section.species-section
+            label(for='species') Parent Species:
             select#species.form-input(type='select', placeholder='Select species' name='species' required='true' )
                 - if (species_list)
                     - species_list.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});

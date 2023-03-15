@@ -239,17 +239,24 @@ footer {
 .plant-form select,
 .plant-form textarea,
 .species-form input,
-.species-form textarea {
+.species-form textarea,
+.cultivar-form input,
+.cultivar-form select,
+.flavor-form input {
     background-color: rgba(237, 237, 237, 0.849);
     border: none;
     font-family: 'Fira Mono';
+    padding: 8px;
 }
 
 .plant-form input:not(.checkbox-input):focus,
 .plant-form select:focus,
 .plant-form textarea:focus,
 .species-form input:focus,
-.species-form textarea:focus {
+.species-form textarea:focus,
+.cultivar-form input:focus,
+.cultivar-form select:focus,
+.flavor-form input:focus {
     outline: 2px solid var(--pink);
     background-color: rgb(255, 236, 243);
 }
@@ -258,7 +265,10 @@ footer {
 .plant-form select:invalid,
 .plant-form textarea:not(::placeholder):invalid,
 .species-form input:not(::placeholder):invalid,
-.species-form textarea:not(::placeholder):invalid {
+.species-form textarea:not(::placeholder):invalid,
+.cultivar-form input:not(::placeholder):invalid,
+.cultivar-form select:invalid,
+.flavor-form input:not(::placeholder):invalid {
     outline: 2px solid rgb(255, 153, 0);
     background-color: rgb(255, 232, 197);
 }
@@ -281,6 +291,7 @@ footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    text-align: end;
 }
 
 .plant-form .form-input:not(.flavor-input) {
@@ -321,8 +332,7 @@ footer {
     font-size: calc(0.5*var(--rvv));
 }
 
-.plant-form button,
-.species-form button {
+form button {
     font-size: calc(0.5*var(--rvv));
     padding: 10px;
     border-radius: 3px;
@@ -336,7 +346,7 @@ footer {
     transition: transform 0.1s ease-in-out;
 }
 
-.plant-form button:hover {
+form button:hover {
     transform: scale(1.05);
 }
 
@@ -380,7 +390,7 @@ footer {
 .species-form .form-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
+    column-gap: 20px;
     grid-template-areas: "species-form-label species-form-input";
 }
 
@@ -398,6 +408,7 @@ footer {
 }
 
 .species-form #name {
+    margin: auto 0;
     height: 30px;
 }
 
@@ -421,6 +432,45 @@ footer {
 
 .cultivar-name {
     font-size: calc(0.6*var(--rvv));
+}
+
+/* cultivar form */
+
+.cultivar-form {
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.453);
+    border-radius: 5px;
+}
+
+.cultivar-form .form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    grid-template-areas: "cultivar-form-label cultivar-form-input";
+}
+
+.cultivar-form label {
+    grid-area: cultivar-form-label;
+    font-size: calc(0.6*var(--rvv));
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: end;
+}
+
+.cultivar-form input {
+    grid-area: cultivar-form-input;
+    margin: auto 0;
+    height: 30px;
+}
+
+.cultivar-form select {
+    margin: auto 0;
+    height: 50px;
 }
 
 /* flavor list view */
@@ -454,6 +504,37 @@ footer {
 
 .flavor-item a:hover {
     text-shadow: none;
+}
+
+/* flavor form */
+
+.flavor-form {
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.453);
+    border-radius: 5px;
+}
+
+.flavor-form .form-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
+    grid-template-areas: "flavor-form-label flavor-form-input";
+}
+
+.flavor-form label {
+    grid-area: flavor-form-label;
+    font-size: calc(0.6*var(--rvv));
+    text-align: end;
+}
+
+.flavor-form input {
+    grid-area: flavor-form-input;
+    height: 30px;
+    margin: auto 0;
 }
 
 
@@ -497,4 +578,11 @@ footer {
     .flavor-list {
         justify-content: center;
     }
+
+    select {
+        max-width: 85%;
+        text-overflow: ellipsis;
+    }
+
+    
 }

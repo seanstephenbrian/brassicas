@@ -27,7 +27,7 @@ block content
             option(value=cultivar._id) #{cultivar.name}
     div.form-section.description-section
       label(for='description') Description:
-      textarea#description.form-input(type='textarea' placeholder='Enter a variety description here.' name='description' required='true') #{undefined===plant ? '' : plant.description}
+      textarea#description.form-input(type='textarea' placeholder='Enter plant variety description here' name='description' required='true') #{undefined===plant ? '' : plant.description}
     div.form-section.flavor-section
       label.flavor-label.main-flavor-label Flavors
       div.flavor-options

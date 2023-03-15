@@ -55,7 +55,7 @@ exports.flavor_detail = (req, res, next) => {
 
 // display author create form on GET:
 exports.flavor_create_get = (req, res) => {
-    res.render('flavor_form', { title: 'Create a New Flavor' });
+    res.render('flavor_form', { title: 'Add a New Flavor to brassicaDB' });
 }
 
 // handle author create on POST:

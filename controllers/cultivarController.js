@@ -67,7 +67,7 @@ exports.cultivar_create_get = function(req, res, next) {
             res.render(
                 'cultivar_form', 
                 {
-                    title: `Create a New Cultivar`,
+                    title: `Add a New Cultivar to brassicaDB`,
                     species_list: list_species
                 }
             );

@@ -3,8 +3,8 @@ extends layout
 block content 
     h1 #{title}
 
-    form(method='POST' action='')
-        div.form-section
+    form(class='flavor-form' method='POST' action='')
+        div.form-section.name-section
             label(for='name') Flavor Name:
             input#name.form-input(
                 type='text',
