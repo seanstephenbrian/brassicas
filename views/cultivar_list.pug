@@ -1,14 +1,21 @@
 extends layout 
 
 block content 
-    ul 
+    h1.list-title All Cultivars
+    ul.page-list.cultivar-list
+        li.demo-item.cultivar-item 
+            div.cultivar-name Cultivar 
+            div.species-detail Parent Species
         each cultivar in cultivar_list 
             - if (cultivar.species)
-                li 
-                    a(href=cultivar.url) #{cultivar.name}
-                    span(class='species-detail') (#{cultivar.species.name})
+                li.cultivar-item
+                    div.cultivar-name 
+                        a(href=cultivar.url) #{cultivar.name}
+                    span(class='species-detail') 
+                        a(href=cultivar.species.url) #{cultivar.species.name}
             - if (!cultivar.species)
-                li 
-                    a(href=cultivar.url) #{cultivar.name}
+                li.cultivar-item
+                    div.cultivar-name  
+                        a(href=cultivar.url) #{cultivar.name}
         else 
             li There are no cultivars.

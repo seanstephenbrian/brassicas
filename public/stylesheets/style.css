@@ -142,6 +142,11 @@ footer {
 
 /* index page */
 
+.index-title,
+.list-title {
+    font-size: calc(0.8*var(--rvv));
+}
+
 .inventory-stats {
     font-size: 1rem;
     margin-top: 30px;
@@ -184,10 +189,6 @@ footer {
 
 /* general list view styles: */
 
-.list-title {
-    font-size: calc(0.8*var(--rvv));
-}
-
 .page-list {
     display: flex;
     flex-direction: column;
@@ -216,6 +217,7 @@ footer {
 
 .plant-name {
     grid-area: plant-name;
+    font-size: calc(0.6*var(--rvv));
 }
 
 .plant-species {
@@ -244,6 +246,32 @@ footer {
 
 .species-link {
     align-self: flex-end;
+}
+
+/* cultivar list view */
+
+.cultivar-list {
+    
+}
+
+.cultivar-item {
+    max-width: 700px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.453);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.cultivar-item.demo-item {
+    background-color: rgba(255, 255, 255, 0.685);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cultivar-name {
+    font-size: calc(0.6*var(--rvv));
 }
 
 @media screen and (max-width: 800px) {
