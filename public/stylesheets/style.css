@@ -332,22 +332,33 @@ a.purchase-link {
 
 .plant-update {
     grid-area: plant-update;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 .plant-delete {
     grid-area: plant-delete;
+    margin-left: 10px;
 }
 
-.plant-update,
-.plant-delete {
+.action-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #ff92bc;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 3px;
+    transition: transform 0.1s ease-in-out;
 }
 
-.plant-update a,
-.plant-delete a {
+.action-button a {
     text-align: center;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    transform: scale(1.01);
 }
 
 /* create plant form */
@@ -707,9 +718,13 @@ form button:hover,
         justify-content: center;
     }
 
+    .form-input[type='text'] {
+        max-width: 75%;
+    }
+
     select {
         width: 190px;
-        max-width: 95%;
+        max-width: 80%;
         text-overflow: ellipsis;
     }
 
