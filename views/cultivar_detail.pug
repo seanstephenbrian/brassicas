@@ -4,17 +4,21 @@ block content
     h1= title 
 
     div(class='cultivar-info')
-        div(class='cultivar-name') #{cultivar_data.name}
+        div.cultivar-name-label.light.right Name:
+        div(class='cultivar-name-text') #{cultivar_data.name}
         - if (cultivar_data.species)
-            div(class='cultivar-species') Species: 
+            div(class='cultivar-species-label light right') Parent Species:
+            div.cultivar-species-text 
                 a(href=cultivar_data.species.url) #{cultivar_data.species.name}
         - if (cultivar_plants.length > 0)
-            div(class='cultivar-plants') Plant varieties in this cultivar:
-                ul
+            div(class='cultivar-plants-label light right') Plant varieties in this cultivar:
+            div.cultivar-plants-text
+                ul.cultivar-plants-list
                     each plant in cultivar_plants 
-                        li 
+                        li.cultivar-plant 
                             a(href=plant.url) #{plant.name}
-        div(class='cultivar-update')
-            a(href=cultivar_data.url + '/update') Update this cultivar
-        div(class='cultivar-delete')
-            a(href=cultivar_data.url + '/delete') Delete this cultivar
+        div.cultivar-action-buttons
+            div(class='cultivar-update action-button')
+                a(href=cultivar_data.url + '/update') Update this cultivar
+            div(class='cultivar-delete action-button')
+                a(href=cultivar_data.url + '/delete') Delete this cultivar

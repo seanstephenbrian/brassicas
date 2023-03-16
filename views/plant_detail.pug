@@ -32,7 +32,8 @@ block content
             -   if (plant_data.in_stock)
                 button(class='purchase-button')
                     a(class='purchase-link' href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
-        div.action-button.plant-update.left-column
-            a(class='action-link' href=plant_data.url + '/update') Update this plant
-        div.action-button.plant-delete
-            a(class='action-link' href=plant_data.url + '/delete') Delete this plant
+        div.plant-action-buttons
+            div.action-button.plant-update.left-column
+                a(class='action-link' href=plant_data.url + '/update') Update this plant
+            div.action-button.plant-delete
+                a(class='action-link' href=plant_data.url + '/delete') Delete this plant

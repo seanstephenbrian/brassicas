@@ -240,7 +240,7 @@ footer {
         "plant-cultivars-label plant-cultivars-text"
         "plant-flavors-label plant-flavors-text"
         "in-stock-label in-stock-status"
-        "plant-update plant-delete";
+        "plant-action-buttons plant-action-buttons";
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.453);
     padding: 20px 30px;
@@ -359,13 +359,10 @@ a.purchase-link {
     text-shadow: none;
 }
 
-.plant-update {
-    grid-area: plant-update;
-    margin-left: auto;
-}
-
-.plant-delete {
-    grid-area: plant-delete;
+.plant-action-buttons {
+    grid-area: plant-action-buttons;
+    display: flex;
+    justify-content: center;
 }
 
 .action-button {
@@ -386,7 +383,7 @@ a.purchase-link {
 }
 
 .action-button:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 /* create plant form */
@@ -509,11 +506,18 @@ form button:hover,
 }
 
 .species-name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-size: calc(0.6*var(--rvv));
 }
 
 .species-link {
     align-self: flex-end;
+}
+
+.species-link a:hover {
+    text-shadow: none;
 }
 
 /* species form */
@@ -584,6 +588,7 @@ form button:hover,
 
 .right {
     margin-left: auto;
+    text-align: end;
 }
 
 .species-name-label {
@@ -604,7 +609,6 @@ form button:hover,
 
 .species-plants-label {
     grid-area: species-plants-label;
-    text-align: end;
 }
 
 .species-plants {
@@ -666,6 +670,84 @@ form button:hover,
 
 .cultivar-name {
     font-size: calc(0.6*var(--rvv));
+}
+
+/* cultivar detail view */
+
+.cultivar-info {
+    max-width: 1000px;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 25px;
+    row-gap: 20px;
+    grid-template-areas:
+        "cultivar-name-label cultivar-name-text"
+        "cultivar-species-label cultivar-species-text"
+        "cultivar-plants-label cultivar-plants-text"
+        "cultivar-action-buttons cultivar-action-buttons";
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.453);
+    padding: 20px 30px;
+    font-size: calc(0.6*var(--rvv));
+}
+
+.cultivar-name-label {
+    grid-area: cultivar-name-label;
+}
+
+.cultivar-name-text {
+    grid-area: cultivar-name-text;
+}
+
+.cultivar-species-label {
+    grid-area: cultivar-species-label;
+}
+
+.cultivar-species-text {
+    grid-area: cultivar-species-text;
+}
+
+.cultivar-plants-label {
+    grid-area: cultivar-plants-label;
+}
+
+.cultivar-plants-text {
+    grid-area: cultivar-plants-text;
+}
+
+.cultivar-plants-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.cultivar-plant {
+    background-color: rgba(255, 255, 255, 0.453);
+    border-radius: 5px;
+    transition: transform 0.1s ease-in-out;
+}
+
+.cultivar-plant:hover {
+    transform: scale(1.05);
+}
+
+.cultivar-plant a {
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.cultivar-plant a:hover {
+    text-shadow: none;
+}
+
+.cultivar-action-buttons {
+    grid-area: cultivar-action-buttons;
+    display: flex;
+    justify-content: center;
 }
 
 /* cultivar form */
@@ -740,6 +822,52 @@ form button:hover,
     text-shadow: none;
 }
 
+/* flavor detail view */
+
+.flavor-info {
+    max-width: 1000px;
+}
+
+.flavor-info p {
+    margin: 20px 0;
+}
+
+.flavor-plants-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.flavor-plant {
+    background-color: rgba(255, 255, 255, 0.453);
+    border-radius: 5px;
+    transition: transform 0.1s ease-in-out;
+}
+
+.flavor-plant:hover {
+    transform: scale(1.05);
+}
+
+.flavor-plant a:hover {
+    text-shadow: none;
+}
+
+.flavor-plant a {
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.flavor-action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    transform: scale(1.1);
+}
+
 /* flavor form */
 
 .flavor-form {
@@ -812,18 +940,81 @@ form button:hover,
     .plant-info {
         padding: 20px 0;
         width: 100%;
+        grid-template-areas:
+            "plant-name-label plant-name-text"
+            "plant-description-label plant-description-label"
+            "plant-description-text plant-description-text"
+            "plant-species-label plant-species-text"
+            "plant-cultivars-label plant-cultivars-text"
+            "plant-flavors-label plant-flavors-text"
+            "in-stock-label in-stock-status"
+            "plant-action-buttons plant-action-buttons";
+    }
+
+    .plant-description-label {
+        text-align: center;
+        margin: 0 auto -10px;
+    }
+
+    .plant-description-text {
+        text-align: center;
+        margin: 0 auto;
     }
 
     .plant-form .form-section:not(.flavor-section) {
         grid-template-columns: 40% 1fr;
     }
 
+    .species-info {
+        grid-template-areas:
+            "species-name-label species-name-text"
+            "species-description-label species-description-label"
+            "species-description-body species-description-body"
+            "species-plants-label species-plants-label"
+            "species-plants species-plants"
+            "species-delete species-delete";
+    }
+
+    .species-description-label {
+        text-align: center;
+        margin: 0 auto -10px;
+    }
+
+    .species-plants-label {
+        text-align: center;
+        margin: 0 auto;
+    }
+
     .species-plants-list {
-        gap: 10px;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .species-plant a {
+        padding: 5px;
     }
 
     .species-form .form-section {
         grid-template-columns: 40% 1fr;
+    }
+
+    .cultivar-info {
+        grid-template-areas:
+            "cultivar-name-label cultivar-name-text"
+            "cultivar-species-label cultivar-species-text"
+            "cultivar-plants-label cultivar-plants-label"
+            "cultivar-plants-text cultivar-plants-text"
+            "cultivar-action-buttons cultivar-action-buttons";
+    }
+
+    .cultivar-plants-label {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .cultivar-plants-list {
+        justify-content: center;
+        gap: 15px;
     }
 
     .cultivar-form .form-section {
