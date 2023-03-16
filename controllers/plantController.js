@@ -25,7 +25,7 @@ exports.index = (req, res) => {
         },
         (err, results) => {
             res.render('index', {
-                title: 'brassicaDB - Home',
+                title: 'Home',
                 error: err,
                 data: results
             });
@@ -53,7 +53,7 @@ exports.plant_list = function(req, res, next) {
             res.render(
                 'plant_list',
                 {
-                    title: 'brassicaDB | All Varieties',
+                    title: 'All Varieties',
                     plant_list: list_plants
                 }
             );

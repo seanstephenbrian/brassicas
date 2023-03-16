@@ -17,7 +17,7 @@ exports.cultivar_list = function(req, res, next) {
             res.render(
                 'cultivar_list',
                 {
-                    title: 'brassicaDB | All Cultivars',
+                    title: 'All Cultivars',
                     cultivar_list: list_cultivars
                 }
             );
@@ -46,7 +46,7 @@ exports.cultivar_detail = (req, res, next) => {
             res.render(
                 'cultivar_detail',
                 {
-                    title: `brassicaDB | ${results.cultivarDetail.name}`,
+                    title: results.cultivarDetail.name,
                     cultivar_data: results.cultivarDetail,
                     cultivar_plants: results.cultivarPlants
                 }

@@ -15,7 +15,7 @@ exports.flavor_list = function(req, res, next) {
             res.render(
                 'flavor_list',
                 {
-                    title: 'brassicaDB | All Flavors',
+                    title: 'All Flavors',
                     flavor_list: list_flavors
                 }
             );
@@ -43,7 +43,7 @@ exports.flavor_detail = (req, res, next) => {
             res.render(
                 'flavor_detail', 
                 {
-                    title: `brassicaDB | ${results.flavorDetail.flavor}`,
+                    title: results.flavorDetail.flavor,
                     flavor_data: results.flavorDetail,
                     flavor_plants: results.flavorPlants
                 }

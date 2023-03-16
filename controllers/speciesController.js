@@ -15,7 +15,7 @@ exports.species_list = function(req, res, next) {
             res.render(
                 'species_list',
                 {
-                    title: 'brassicaDB | All Species',
+                    title: 'All Species',
                     species_list: list_species
                 }
             );
@@ -43,7 +43,7 @@ exports.species_detail = (req, res, next) => {
             res.render(
                 'species_detail',
                 {
-                    title: `brassicaDB | ${results.speciesDetail.name}`,
+                    title: `Species: ${results.speciesDetail.name}`,
                     species_data: results.speciesDetail,
                     species_plants: results.speciesPlants
                 }

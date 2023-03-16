@@ -4,15 +4,16 @@ block content
     h1= title 
 
     div(class='species-info')
-        div(class='species-name') #{species_data.name}
-        div(class='species-description') 
-            div(class='species-description-label') Description:
-            div(class='species-description-body') #{species_data.description}
+        div.species-name-label.light.right Species Name:
+        div(class='species-name-text') #{species_data.name} 
+        div(class='species-description-label light right') Description:
+        div(class='species-description-body') #{species_data.description}
         - if (species_plants.length > 0)
-            div(class='species-plants') Plant varieties in this species:
-                ul
+            div(class='species-plants-label light right') Plant varieties in this species:
+            div.species-plants
+                ul.species-plants-list
                     each plant in species_plants 
-                        li 
+                        li.species-plant 
                             a(href=plant.url) #{plant.name}
-        div(class='species-delete')
+        div(class='action-button species-delete')
             a(href=species_data.url + '/delete') Delete this species
