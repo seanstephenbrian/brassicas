@@ -6,10 +6,16 @@ block content
         a(href='https://en.wikipedia.org/wiki/Brassica' target='_blank' rel='noopener noreferrer') Brassica
         | .
     p The collection can be filtered by variety, species, cultivar, and relevant flavor notes.
-    p This demo web app was built with Node.js, Express, and MongoDB.
+    p This demo web app was built with 
+        strong Node.js
+        |, 
+        strong Express
+        |, and 
+        strong MongoDB/Mongoose
+        |.
 
     section.inventory-stats
-        h1.inventory-title Inventory Stats
+        h1.inventory-title brassicaDB Inventory
         if error 
             p We're sorry, we encountered an error retrieving the data.
         else

@@ -112,7 +112,7 @@ header {
 }
 
 .icon:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .expand-icon,
@@ -143,6 +143,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: calc(0.3*var(--rvv));
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -160,7 +161,6 @@ footer {
 /* index page */
 
 .inventory-stats {
-    font-size: 1rem;
     margin-top: 30px;
     min-width: 400px;
     width: 25%;
@@ -175,7 +175,7 @@ footer {
 }
 
 .inventory-title {
-    font-size: 1.4rem;
+    font-size: calc(0.6*var(--rvv));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,10 +183,13 @@ footer {
 }
 
 .inventory-list {
+    width: 50%;
+    font-size: calc(0.4*var(--rvv));
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     text-align: end;
+    padding-right: 20px;
 }
 
 .inventory-list-item a,
@@ -846,6 +849,7 @@ form button:hover,
 
 .flavor-info p {
     margin: 20px 0;
+    font-size: calc(0.5*var(--rvv));
 }
 
 .flavor-plants-list {
@@ -879,9 +883,8 @@ form button:hover,
 
 .flavor-action-buttons {
     display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    transform: scale(1.1);
+    justify-content: flex-start;
+    margin: 10px 0 50px;
 }
 
 /* flavor form */
@@ -949,7 +952,7 @@ form button:hover,
 /* footer */
 
 footer {
-    margin: 100px 0 50px;
+    margin: auto 0 50px;
 }
 
 /* mobile styles: */
@@ -1108,5 +1111,8 @@ footer {
         text-overflow: ellipsis;
     }
 
+    footer {
+        margin-top: auto;
+    }
     
 }

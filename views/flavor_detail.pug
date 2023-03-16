@@ -4,6 +4,11 @@ block content
     h1= title 
 
     div(class='flavor-info')
+        div.flavor-action-buttons
+            div(class='flavor-update action-button')
+                a(href=flavor_data.url + '/update') Edit this flavor
+            div(class='flavor-delete action-button')
+                a(href=flavor_data.url + '/delete') Delete this flavor
         - if (flavor_plants.length > 0)
             div(class='flavor-plants') 
                 p Plant varieties with this flavor note:
@@ -11,8 +16,3 @@ block content
                     each plant in flavor_plants 
                         li.flavor-plant 
                             a(href=plant.url) #{plant.name}
-        div.flavor-action-buttons
-            div(class='flavor-update action-button')
-                a(href=flavor_data.url + '/update') Edit this flavor
-            div(class='flavor-delete action-button')
-                a(href=flavor_data.url + '/delete') Delete this flavor
