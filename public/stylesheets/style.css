@@ -100,6 +100,15 @@ header {
     border-radius: 5px;
 }
 
+.home-icon {
+    height: 30px;
+}
+
+.expand-icon,
+.collapse-icon {
+    display: none;
+}
+
 .nav-list {
     font-size: 1rem;
     display: flex;
@@ -899,6 +908,11 @@ form button:hover,
     margin: auto 0;
 }
 
+footer {
+    margin: 100px 0 50px;
+}
+
+/* mobile styles: */
 
 @media screen and (max-width: 800px) {
 
@@ -909,6 +923,15 @@ form button:hover,
 
     .sidebar {
         margin: 20px 0;
+    }
+
+    .expand-icon,
+    .collapse-icon {
+        display: list-item;
+    }
+
+    .hidden {
+        display: none;
     }
 
     .nav-list {

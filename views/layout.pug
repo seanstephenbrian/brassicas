@@ -5,6 +5,7 @@ html(lang='en')
         link(rel='stylesheet', href='/stylesheets/style.css')
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1')
+        script(src='/js/expand-menu.js' defer)
     body
         header
             div(class='site-title') 
@@ -13,22 +14,25 @@ html(lang='en')
             nav
                 ul(class='nav-list')
                     li
-                        a(class='home-link' href='/inventory') Home
-                    li
+                        a(class='home-link' href='/inventory')
+                            img(class='home-icon' src='/img/home.svg')
+                    li.expand-icon expand icon 
+                    li.collapse-icon.hidden collapse icon
+                    li.sidebar-link.hidden
                         a(href='/inventory/plants') View Plant Varieties
-                    li
+                    li.sidebar-link.hidden
                         a(href='/inventory/species-list') View Species
-                    li
+                    li.sidebar-link.hidden
                         a(href='/inventory/cultivars') View Cultivars
-                    li
+                    li.sidebar-link.hidden
                         a(href='/inventory/flavors') View Flavors
-                    li 
+                    li.sidebar-link.hidden
                         a(href='/inventory/plant/create') Create New Plant Variety 
-                    li 
+                    li.sidebar-link.hidden
                         a(href='/inventory/species/create') Create New Species
-                    li 
+                    li.sidebar-link.hidden
                         a(href='/inventory/cultivar/create') Create New Cultivar 
-                    li 
+                    li.sidebar-link.hidden
                         a(href='/inventory/flavor/create') Create New Flavor
         main
             block content
