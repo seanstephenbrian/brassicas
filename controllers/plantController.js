@@ -71,7 +71,7 @@ exports.plant_detail = function(req, res, next) {
             res.render(
                 'plant_detail', 
                 {
-                    title: `brassicaDB | ${plant_info.name}`,
+                    title: `Plant Variety: ${plant_info.name}`,
                     plant_data: plant_info
                 }
             );
@@ -219,7 +219,7 @@ exports.plant_update_get = (req, res, next) => {
                     res.render(
                         'plant_form',
                         {
-                            title: 'Update Plant',
+                            title: `Updating ${found_plant.name}`,
                             plant: found_plant,
                             species: results.species,
                             cultivars: results.cultivars,
@@ -270,8 +270,6 @@ exports.plant_update_post = [
                 _id: req.params.id
             }
         }
-
-        console.log(updatedPlantDetails);
 
         const updatedPlant = new Plant(updatedPlantDetails);
 

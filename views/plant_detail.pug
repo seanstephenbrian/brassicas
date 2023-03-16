@@ -4,32 +4,35 @@ block content
     h1= title 
 
     div(class='plant-info')
-        div(class='plant-name') #{plant_data.name}
-        div(class='plant-description') #{plant_data.description}
-        div(class='plant-classification')
-            - if (plant_data.species)
-                div(class='plant-species') Species: 
-                    a(href=plant_data.species.url) #{plant_data.species.name}
-            - if (plant_data.cultivar.length > 0)
-                div(class='plant-cultivars') Cultivars: 
-                    each oneCultivar in plant_data.cultivar 
-                        div(class='plant-cultivar') 
-                            a(href=oneCultivar.url) #{oneCultivar.name}
+        div.plant-name-label.left-column Name:
+        div.plant-name-text #{plant_data.name}
+        div.plant-description-label.left-column Description:
+        div.plant-description-text #{plant_data.description}
+        - if (plant_data.species)
+            div.plant-species-label.left-column Species: 
+            div.plant-species-text 
+                a(href=plant_data.species.url) #{plant_data.species.name}
+        - if (plant_data.cultivar.length > 0)
+            div.plant-cultivars-label.left-column Cultivars: 
+            div.plant-cultivars-text
+                each oneCultivar in plant_data.cultivar 
+                    a(href=oneCultivar.url) #{oneCultivar.name}
         - if (plant_data.flavor)
-            div(class='plant-flavors') Flavors: 
+            div.plant-flavors-label.left-column Flavors: 
+            div.plant-flavors-text
                 each oneFlavor in plant_data.flavor
                     div(class='plant-flavor') 
                         a(href=oneFlavor.url) #{oneFlavor.flavor}
-        div(class='plant-in-stock')
-            -
-                let stockStatus;
-                if (plant_data.in_stock) stockStatus = 'Available!';
-                if (!plant_data.in_stock) stockStatus = 'Not Available';
-        | #{stockStatus}
-        -   if (plant_data.in_stock)
-            button(class='purchase-button')
-                a(href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
-        div(class='plant-update')
+        div.in-stock-label.left-column In Stock?
+        -
+            let stockStatus;
+            if (plant_data.in_stock) stockStatus = 'Available!';
+            if (!plant_data.in_stock) stockStatus = 'Not Available';
+        div.in-stock-status #{stockStatus}
+            -   if (plant_data.in_stock)
+                button(class='purchase-button')
+                    a(class='purchase-link' href='https://www.google.com/search?q=farmers+market+near+me' target='_blank' rel='noopener noreferrer') Click to Purchase
+        div.plant-update.left-column
             a(href=plant_data.url + '/update') Update this plant
-        div(class='plant-delete')
+        div.plant-delete.left-column
             a(href=plant_data.url + '/delete') Delete this plant

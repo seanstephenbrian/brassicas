@@ -55,6 +55,7 @@ html,
 body {
     overflow-x: hidden;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 body {
@@ -223,6 +224,132 @@ footer {
     grid-area: plant-stock;
 }
 
+/* plant detail view */
+
+.plant-info {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    grid-template-areas:
+        "plant-name-label plant-name-text"
+        "plant-description-label plant-description-text"
+        "plant-species-label plant-species-text"
+        "plant-cultivars-label plant-cultivars-text"
+        "plant-flavors-label plant-flavors-text"
+        "in-stock-label in-stock-status"
+        "plant-update plant-delete";
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.453);
+    padding: 20px 30px;
+    font-size: calc(0.6*var(--rvv));
+}
+
+.plant-info .left-column {
+    text-align: end;
+}
+
+.plant-name-label {
+    grid-area: plant-name-label;
+}
+
+.plant-name-text {
+    grid-area: plant-name-text;
+}
+
+.plant-description-label {
+    grid-area: plant-description-label;
+}
+
+.plant-description-text {
+    grid-area: plant-description-text;
+}
+
+.plant-species-label {
+    grid-area: plant-species-label;
+}
+
+.plant-species-text {
+    grid-area: plant-species-text;
+}
+
+.plant-cultivars-label {
+    grid-area: plant-cultivars-label;
+}
+
+.plant-cultivars-text {
+    grid-area: plant-cultivars-text;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.plant-flavors-label {
+    grid-area: plant-flavors-label;
+}
+
+.plant-flavors-text {
+    grid-area: plant-flavors-text;
+    display: flex;
+}
+
+.in-stock-label {
+    grid-area: in-stock-label;
+}
+
+.in-stock-status {
+    grid-area: in-stock-status;
+}
+
+.purchase-button {
+    font-size: calc(0.4*var(--rvv));
+    width: calc(3*var(--rvv));
+    padding: 10px;
+    margin-left: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    max-width: 150px;
+    border: none;
+    align-self: center;
+    font-family: 'Fira Mono';
+    background-color: #006842;
+    color: rgba(237, 237, 237, 0.849);
+    transition: transform 0.1s ease-in-out;
+}
+
+a.purchase-link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: rgba(237, 237, 237, 0.849);
+    text-decoration: none;
+}
+
+.purchase-link:hover {
+    text-shadow: none;
+}
+
+.plant-update {
+    grid-area: plant-update;
+}
+
+.plant-delete {
+    grid-area: plant-delete;
+}
+
+.plant-update,
+.plant-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plant-update a,
+.plant-delete a {
+    text-align: center;
+}
+
 /* create plant form */
 
 .plant-form {
@@ -346,7 +473,8 @@ form button {
     transition: transform 0.1s ease-in-out;
 }
 
-form button:hover {
+form button:hover,
+.plant-info button:hover {
     transform: scale(1.05);
 }
 
@@ -573,6 +701,15 @@ form button:hover {
         width: auto;
         max-width: 80%;
         flex-direction: column;
+    }
+
+    .plant-info {
+        padding: 20px 0;
+        width: 100%;
+    }
+
+    .purchase-button {
+        margin-left: 5px;
     }
 
     .flavor-list {
