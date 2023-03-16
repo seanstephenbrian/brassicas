@@ -362,40 +362,19 @@ a.purchase-link {
     border-radius: 5px;
 }
 
-.plant-form input,
-.plant-form select,
-.plant-form textarea,
-.species-form input,
-.species-form textarea,
-.cultivar-form input,
-.cultivar-form select,
-.flavor-form input {
+.form-input {
     background-color: rgba(237, 237, 237, 0.849);
     border: none;
     font-family: 'Fira Mono';
     padding: 8px;
 }
 
-.plant-form input:not(.checkbox-input):focus,
-.plant-form select:focus,
-.plant-form textarea:focus,
-.species-form input:focus,
-.species-form textarea:focus,
-.cultivar-form input:focus,
-.cultivar-form select:focus,
-.flavor-form input:focus {
+.form-input:not(.checkbox-input):focus {
     outline: 2px solid var(--pink);
     background-color: rgb(255, 236, 243);
 }
 
-.plant-form input:not(.checkbox-input):not(::placeholder):invalid,
-.plant-form select:invalid,
-.plant-form textarea:not(::placeholder):invalid,
-.species-form input:not(::placeholder):invalid,
-.species-form textarea:not(::placeholder):invalid,
-.cultivar-form input:not(::placeholder):invalid,
-.cultivar-form select:invalid,
-.flavor-form input:not(::placeholder):invalid {
+.form-input:not(::placeholder):invalid {
     outline: 2px solid rgb(255, 153, 0);
     background-color: rgb(255, 232, 197);
 }
@@ -708,6 +687,18 @@ form button:hover,
         width: 100%;
     }
 
+    .plant-form .form-section:not(.flavor-section) {
+        grid-template-columns: 40% 1fr;
+    }
+
+    .species-form .form-section {
+        grid-template-columns: 40% 1fr;
+    }
+
+    .cultivar-form .form-section {
+        grid-template-columns: 40% 1fr;
+    }
+
     .purchase-button {
         margin-left: 5px;
     }
@@ -717,7 +708,8 @@ form button:hover,
     }
 
     select {
-        max-width: 85%;
+        width: 190px;
+        max-width: 95%;
         text-overflow: ellipsis;
     }
 
