@@ -13,11 +13,11 @@ html(lang='en')
         aside(class='sidebar')
             nav
                 ul(class='nav-list')
-                    li
+                    li.icons
                         a(class='home-link' href='/inventory')
-                            img(class='home-icon' src='/img/home.svg')
-                    li.expand-icon expand icon 
-                    li.collapse-icon.hidden collapse icon
+                            img(class='icon home-icon' src='/img/home.svg')
+                        img(class='icon expand-icon' src='/img/expand.svg')
+                        img(class='icon collapse-icon hidden' src='/img/collapse.svg')
                     li.sidebar-link.hidden
                         a(href='/inventory/plants') View Plant Varieties
                     li.sidebar-link.hidden

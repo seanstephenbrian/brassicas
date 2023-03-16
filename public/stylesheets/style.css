@@ -76,8 +76,6 @@ body {
 
 header {
     grid-area: header;
-    display: flex;
-    gap: 10vw;
 }
 
 .site-title {
@@ -94,14 +92,27 @@ header {
 
 .sidebar {
     grid-area: sidebar;
+    width: fit-content;
     background-color: rgba(255, 255, 255, 0.685);
     height: fit-content;
     padding: 20px 10px;
     border-radius: 5px;
 }
 
-.home-icon {
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.icon {
+    cursor: pointer;
     height: 30px;
+    transition: transform 0.1s ease-in-out;
+}
+
+.icon:hover {
+    transform: scale(1.05);
 }
 
 .expand-icon,
@@ -125,10 +136,6 @@ header {
 .nav-list a,
 .nav-list a:visited {
     text-decoration: none;
-}
-
-.home-link {
-    font-size: 1.3rem;
 }
 
 main {
@@ -908,6 +915,39 @@ form button:hover,
     margin: auto 0;
 }
 
+/* delete pages */
+
+.delete-screen {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.delete-title {
+    text-decoration: underline;
+    color: rgb(159, 0, 0);
+}
+
+.delete-confirm {
+    font-size: calc(0.5*var(--rvv));
+}
+
+.delete-item-name {
+    font-weight: 500;
+    font-style: italic;
+}
+
+.delete-screen form {
+    align-self: center;
+}
+
+.delete-button {
+    background-color: rgb(143, 0, 0);
+}
+
+/* footer */
+
 footer {
     margin: 100px 0 50px;
 }
@@ -916,13 +956,19 @@ footer {
 
 @media screen and (max-width: 800px) {
 
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     body {
         display: flex;
         flex-direction: column;
     }
 
     .sidebar {
-        margin: 20px 0;
+        margin: 20px auto;
     }
 
     .expand-icon,

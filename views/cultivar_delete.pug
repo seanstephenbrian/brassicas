@@ -1,12 +1,15 @@
 extends layout
 
 block content
-  h1 #{title}: #{cultivar.name}
+    div.delete-screen
+        h1.delete-title #{title}: #{cultivar.name}
 
-    p Are you sure you want to delete this cultivar?
+        p.delete-confirm Are you sure you want to delete 
+            span.delete-item-name #{cultivar.name}
+            | ? This action cannot be undone.
 
-    form(method='POST' action='')
-      div.form-group
-        input#cultivarid.form-control(type='hidden', name='cultivarid', required='true', value=cultivar._id)
+        form(method='POST' action='')
+            div.form-group
+                input#cultivarid.form-control(type='hidden', name='cultivarid', required='true', value=cultivar._id)
 
-      button(type='submit') Delete
+            button(class='delete-button' type='submit') Yes, delete it

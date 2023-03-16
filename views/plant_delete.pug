@@ -1,12 +1,15 @@
 extends layout
 
 block content
-  h1 #{title}: #{plant.name}
+    div.delete-screen
+        h1.delete-title #{title}: #{plant.name}
 
-    p Are you sure you want to delete this plant?
+        p.delete-confirm Are you sure you want to delete 
+            span.delete-item-name #{plant.name}
+            | ? This action cannot be undone.
 
-    form(method='POST' action='')
-      div.form-group
-        input#plantid.form-control(type='hidden', name='plantid', required='true', value=plant._id)
+        form(method='POST' action='')
+            div.form-group
+                input#plantid.form-control(type='hidden', name='plantid', required='true', value=plant._id)
 
-      button(type='submit') Delete
+            button(class='delete-button' type='submit') Yes, delete it
