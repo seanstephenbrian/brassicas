@@ -15,5 +15,8 @@ block content
                     each plant in species_plants 
                         li.species-plant 
                             a(href=plant.url) #{plant.name}
-        div(class='action-button species-delete')
-            a(href=species_data.url + '/delete') Delete this species
+        div.species-action-buttons
+            div(class='action-button species-update')
+                a(href=species_data.url + '/update') Update this species
+            div(class='action-button species-delete')
+                a(href=species_data.url + '/delete') Delete this species

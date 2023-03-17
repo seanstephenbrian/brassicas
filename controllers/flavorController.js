@@ -138,24 +138,24 @@ exports.flavor_delete_post = (req, res) => {
 // display flavor update form on GET:
 exports.flavor_update_get = (req, res, next) => {
     Flavor.findById(req.params.id)
-        .exec((err, found_flavor) => {
-            if (err) {
-                return next(err);
+    .exec((err, found_flavor) => {
+        if (err) {
+            return next(err);
+        }
+        if (found_flavor == null) {
+            const error = new Error('Flavor not found');
+            error.status = 404;
+            return next(error);
+        } 
+        // success.. render the form:
+        res.render(
+            'flavor_form',
+            {
+                title: 'Update Flavor',
+                flavor: found_flavor
             }
-            if (found_flavor == null) {
-                const error = new Error('Flavor not found');
-                error.status = 404;
-                return next(error);
-            } 
-            // success.. render the form:
-            res.render(
-                'flavor_form',
-                {
-                    title: 'Update Flavor',
-                    flavor: found_flavor
-                }
-            );
-        });
+        );
+    });
 }
 
 // handle flavor update on POST:

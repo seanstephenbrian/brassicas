@@ -550,34 +550,58 @@ form button:hover,
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     background-color: rgba(255, 255, 255, 0.453);
     border-radius: 5px;
 }
 
 .species-form textarea {
-    height: 50px;
+    flex: auto;
+    min-height: 50px;
     resize: none;
 }
 
-.species-form .form-section {
+.species-form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr 200px 1fr;
     column-gap: 20px;
-    grid-template-areas: "species-form-label species-form-input";
+    grid-template-areas: 
+        "species-name-label species-name-input"
+        "species-description-label ."
+        "species-description-input species-description-input"
+        "species-form-button species-form-button";
+}
+
+.species-name-label {
+    grid-area: species-name-label;
+}
+
+.species-name-input {
+    grid-area: species-name-input;
+    width: 90%;
+}
+
+.species-description-label {
+    grid-area: species-description-label;
+    margin-bottom: -15px;
+}
+
+.species-description-input {
+    grid-area: species-description-input;
+}
+
+.species-form button {
+    margin: 0 auto;
+    grid-area: species-form-button;
 }
 
 .species-form label {
-    grid-area: species-form-label;
     font-size: calc(0.6*var(--rvv));
     display: flex;
     justify-content: flex-end;
     align-items: center;
     text-align: end;
-}
-
-.species-form input {
-    grid-area: species-form-input;
 }
 
 .species-form #name {
@@ -598,7 +622,7 @@ form button:hover,
         "species-name-label species-name-text"
         "species-description-label species-description-body"
         "species-plants-label species-plants"
-        "species-delete species-delete";
+        "species-action-buttons species-action-buttons";
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.453);
     padding: 20px 30px;
@@ -667,10 +691,10 @@ form button:hover,
     text-shadow: none;
 }
 
-.species-delete {
-    grid-area: species-delete;
-    font-size: calc(0.7*var(--rvv));
-    margin: 40px auto 20px;
+.species-action-buttons {
+    grid-area: species-action-buttons;
+    display: flex;
+    justify-content: center;
 }
 
 /* cultivar list view */
@@ -1000,6 +1024,8 @@ footer {
     body {
         display: flex;
         flex-direction: column;
+        padding: 5vh 5vw;
+        font-size: calc(0.5*var(--rvv));
     }
 
     .sidebar {
@@ -1039,30 +1065,28 @@ footer {
         width: auto;
         max-width: 80%;
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .inventory-list {
+        font-size: calc(0.5*var(--rvv));
+        width: 100%;
+        align-items: center;
+        padding-right: 0;
     }
 
     .plant-info {
         padding: 20px 0;
         width: 100%;
+        grid-template-columns: 1.3fr 2fr;
         grid-template-areas:
             "plant-name-label plant-name-text"
-            "plant-description-label plant-description-label"
-            "plant-description-text plant-description-text"
+            "plant-description-label plant-description-text"
             "plant-species-label plant-species-text"
             "plant-cultivars-label plant-cultivars-text"
             "plant-flavors-label plant-flavors-text"
             "in-stock-label in-stock-status"
             "plant-action-buttons plant-action-buttons";
-    }
-
-    .plant-description-label {
-        text-align: center;
-        margin: 0 auto -10px;
-    }
-
-    .plant-description-text {
-        text-align: center;
-        margin: 0 auto;
     }
 
     .plant-form .form-section:not(.flavor-section) {
@@ -1072,16 +1096,11 @@ footer {
     .species-info {
         grid-template-areas:
             "species-name-label species-name-text"
-            "species-description-label species-description-label"
+            "species-description-label ."
             "species-description-body species-description-body"
             "species-plants-label species-plants-label"
             "species-plants species-plants"
-            "species-delete species-delete";
-    }
-
-    .species-description-label {
-        text-align: center;
-        margin: 0 auto -10px;
+            "species-action-buttons species-action-buttons";
     }
 
     .species-plants-label {

@@ -136,8 +136,26 @@ exports.species_delete_post = (req, res) => {
 }
 
 // display species update form on GET:
-exports.species_update_get = (req, res) => {
-    res.send('SPECIES UPDATE GET');
+exports.species_update_get = (req, res, next) => {
+    Species.findById(req.params.id)
+    .exec((err, found_species) => {
+        if (err) {
+            return next(err);
+        }
+        if (found_species == null) {
+            const error = new Error('Species not found');
+            error.status = 404;
+            return next(error);
+        }
+        // success... render the form:
+        res.render(
+            'species_form',
+            {
+                title: 'Update Species',
+                species: found_species
+            }
+        );
+    });
 }
 
 // handle species update on POST:
