@@ -12,4 +12,8 @@ block content
             div.form-group
                 input#cultivarid.form-control(type='hidden', name='cultivarid', required='true', value=cultivar._id)
 
+            div.form-group.pw-form-group
+                label(class='pw-label' for='password') Admin Password:
+                input.form-input(class='pw-input' type='password' name='password' required='true')
+
             button(class='delete-button' type='submit') Yes, delete it

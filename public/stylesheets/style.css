@@ -385,6 +385,10 @@ a.purchase-link {
 }
 
 .action-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: 'Fira Mono';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -942,11 +946,39 @@ form button:hover,
 }
 
 .delete-screen form {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pw-form-group {
+    display: flex;
+    gap: 10px;
+}
+
+.pw-label {
+    font-size: calc(0.6*var(--rvv));
+}
+
+.delete-screen form button {
+    align-self: flex-start;
 }
 
 .delete-button {
     background-color: rgb(143, 0, 0);
+}
+
+/* incorrect password page */
+
+.pw-action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.back-button,
+.home-button {
+    font-size: calc(0.45*var(--rvv));
 }
 
 /* footer */

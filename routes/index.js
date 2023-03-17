@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
     res.redirect('/inventory');
 });
 
+router.get('/incorrect-password', function(req, res, next) {
+    res.render('incorrect_password');
+});
+
 module.exports = router;

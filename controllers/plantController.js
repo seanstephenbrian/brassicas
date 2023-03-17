@@ -178,12 +178,16 @@ exports.plant_delete_get = (req, res) => {
 
 // handle plant delete on POST:
 exports.plant_delete_post = (req, res) => {
-    Plant.findByIdAndRemove(req.body.plantid, (err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/inventory/plants');
-    });
+    if (req.body.password === process.env.DELETE_PW) {
+        Plant.findByIdAndRemove(req.body.plantid, (err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/inventory/plants');
+        });
+    } else {
+        res.redirect('/incorrect-password');
+    }
 }
 
 // display plant update form on GET:

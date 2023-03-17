@@ -4,6 +4,7 @@ const Species = require('../models/species');
 
 const async = require('async');
 const { body, validationResult } = require("express-validator");
+require('dotenv').config();
 
 // display all cultivars:
 exports.cultivar_list = function(req, res, next) {
@@ -153,12 +154,16 @@ exports.cultivar_delete_get = (req, res, next) => {
 
 // handle cultivar delete on POST:
 exports.cultivar_delete_post = (req, res) => {
-    Cultivar.findByIdAndRemove(req.body.cultivarid, (err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/inventory/cultivars');
-    });
+    if (req.body.password === process.env.DELETE_PW) {
+        Cultivar.findByIdAndRemove(req.body.cultivarid, (err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/inventory/cultivars');
+        });
+    } else {
+        res.redirect('/incorrect-password');
+    }
 }
 
 // display cultivar update form on GET:

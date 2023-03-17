@@ -123,12 +123,16 @@ exports.species_delete_get = (req, res, next) => {
 
 // handle species delete on POST:
 exports.species_delete_post = (req, res) => {
-    Species.findByIdAndRemove(req.body.speciesid, (err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/inventory/species-list');
-    })
+    if (req.body.password === process.env.DELETE_PW) {
+        Species.findByIdAndRemove(req.body.speciesid, (err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/inventory/species-list');
+        });
+    } else {
+        res.redirect('/incorrect-password');
+    }
 }
 
 // display species update form on GET:

@@ -123,12 +123,16 @@ exports.flavor_delete_get = (req, res) => {
 
 // handle flavor delete on POST:
 exports.flavor_delete_post = (req, res) => {
-    Flavor.findByIdAndRemove(req.body.flavorid, (err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/inventory/flavors');
-    });
+    if (req.body.password === process.env.DELETE_PW) {
+        Flavor.findByIdAndRemove(req.body.flavorid, (err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/inventory/flavors');
+        });
+    } else {
+        res.redirect('/incorrect-password');
+    }
 }
 
 // display flavor update form on GET:
