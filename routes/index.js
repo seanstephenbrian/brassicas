@@ -6,8 +6,13 @@ router.get('/', function(req, res, next) {
     res.redirect('/inventory');
 });
 
-router.get('/incorrect-password', function(req, res, next) {
-    res.render('incorrect_password');
+// GET incorrect password page:
+
+router.get('/incorrect-password/:itemtype/:itemid', function(req, res, next) {
+    res.render('incorrect_password', {
+        item_type: req.params.itemtype,
+        item_id: req.params.itemid
+    });
 });
 
 module.exports = router;

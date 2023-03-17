@@ -186,7 +186,7 @@ exports.plant_delete_post = (req, res) => {
             res.redirect('/inventory/plants');
         });
     } else {
-        res.redirect('/incorrect-password');
+        res.redirect(`/incorrect-password/plant/${req.body.plantid}`);
     }
 }
 

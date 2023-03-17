@@ -131,7 +131,7 @@ exports.flavor_delete_post = (req, res) => {
             res.redirect('/inventory/flavors');
         });
     } else {
-        res.redirect('/incorrect-password');
+        res.redirect(`/incorrect-password/flavor/${req.body.flavorid}`);
     }
 }
 

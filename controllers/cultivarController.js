@@ -162,7 +162,7 @@ exports.cultivar_delete_post = (req, res) => {
             res.redirect('/inventory/cultivars');
         });
     } else {
-        res.redirect('/incorrect-password');
+        res.redirect(`/incorrect-password/cultivar/${req.body.cultivarid}`);
     }
 }
 

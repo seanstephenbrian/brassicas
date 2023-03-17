@@ -131,7 +131,7 @@ exports.species_delete_post = (req, res) => {
             res.redirect('/inventory/species-list');
         });
     } else {
-        res.redirect('/incorrect-password');
+        res.redirect(`/incorrect-password/species/${req.body.speciesid}`);
     }
 }
 
