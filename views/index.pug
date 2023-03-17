@@ -1,30 +1,33 @@
 extends layout
 
 block content
-    h1.index-title Welcome to brassicaDB
-    p #[strong brassicaDB] is an editable inventory of edible vegetables from the plant genus 
-        a(href='https://en.wikipedia.org/wiki/Brassica' target='_blank' rel='noopener noreferrer') Brassica
-        | .
-    p The collection can be filtered by variety, species, cultivar, and relevant flavor notes.
-    p This demo web app was built with 
-        strong Node.js
-        |, 
-        strong Express
-        |, and 
-        strong MongoDB/Mongoose
-        |.
+    div.index-page
+        h1.index-title Welcome to brassicaDB
+        p #[strong brassicaDB] is an editable inventory of edible vegetables from the plant genus 
+            a(href='https://en.wikipedia.org/wiki/Brassica' target='_blank' rel='noopener noreferrer') Brassica
+            |  and its parent family 
+            a(href='https://en.wikipedia.org/wiki/Brassicaceae' target='_blank' rel='noopener noreferrer') Brassicaceae
+            | .
+        p The collection can be filtered by variety, species, cultivar, and relevant flavor notes.
+        p This demo web app was built with 
+            strong Node.js
+            |, 
+            strong Express
+            |, and 
+            strong MongoDB/Mongoose
+            |.
 
-    section.inventory-stats
-        h1.inventory-title brassicaDB Inventory
-        if error 
-            p We're sorry, we encountered an error retrieving the data.
-        else
-            ul.inventory-list 
-                li.inventory-list-item #[strong Varieties:] 
-                    a(href='/inventory/plants') !{data.plantCount}
-                li.inventory-list-item #[strong Species:] 
-                    a(href='/inventory/species-list') !{data.speciesCount}
-                li.inventory-list-item #[strong Cultivars:] 
-                    a(href='/inventory/cultivars') !{data.cultivarCount}
-                li.inventory-list-item #[strong Flavors:] 
-                    a(href='/inventory/flavors') !{data.flavorCount}
+        section.inventory-stats
+            h1.inventory-title brassicaDB Inventory
+            if error 
+                p We're sorry, we encountered an error retrieving the data.
+            else
+                ul.inventory-list 
+                    li.inventory-list-item #[strong Varieties:] 
+                        a(href='/inventory/plants') !{data.plantCount}
+                    li.inventory-list-item #[strong Species:] 
+                        a(href='/inventory/species-list') !{data.speciesCount}
+                    li.inventory-list-item #[strong Cultivars:] 
+                        a(href='/inventory/cultivars') !{data.cultivarCount}
+                    li.inventory-list-item #[strong Flavors:] 
+                        a(href='/inventory/flavors') !{data.flavorCount}

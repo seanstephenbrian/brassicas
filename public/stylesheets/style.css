@@ -146,6 +146,13 @@ main {
     margin-bottom: 50px;
 }
 
+.index-page {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: calc(0.3*var(--rvv));
+}
+
 h1 {
     font-size: calc(0.8*var(--rvv));
 }
@@ -167,6 +174,7 @@ footer {
     max-width: 600px;
     padding: 30px 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 30px;
@@ -187,9 +195,8 @@ footer {
     font-size: calc(0.4*var(--rvv));
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    text-align: end;
-    padding-right: 20px;
+    align-items: center;
+    text-align: center;
 }
 
 .inventory-list-item a,
@@ -249,7 +256,7 @@ footer {
     max-width: 1000px;
     width: fit-content;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2.5fr;
     column-gap: 20px;
     row-gap: 20px;
     grid-template-areas:
@@ -412,7 +419,7 @@ a.purchase-link {
 /* create plant form */
 
 .plant-form {
-    max-width: 500px;
+    max-width: 800px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -439,7 +446,7 @@ a.purchase-link {
 }
 
 .plant-form textarea {
-    height: 75px;
+    height: 100px;
     resize: none;
 }
 
@@ -1085,12 +1092,17 @@ footer {
         grid-template-columns: 1.3fr 2fr;
         grid-template-areas:
             "plant-name-label plant-name-text"
-            "plant-description-label plant-description-text"
+            "plant-description-label ."
+            "plant-description-text plant-description-text"
             "plant-species-label plant-species-text"
             "plant-cultivars-label plant-cultivars-text"
             "plant-flavors-label plant-flavors-text"
             "in-stock-label in-stock-status"
             "plant-action-buttons plant-action-buttons";
+    }
+
+    .plant-description-text {
+        padding: 0 30px;
     }
 
     .plant-form .form-section:not(.flavor-section) {
