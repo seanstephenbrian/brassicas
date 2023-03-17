@@ -445,7 +445,7 @@ a.purchase-link {
 
 .plant-form .form-section:not(.flavor-section) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     column-gap: 10px;
     grid-template-areas: "plant-form-label plant-form-input";
 }
@@ -1068,8 +1068,12 @@ footer {
         gap: 10px;
     }
 
+    .inventory-title {
+        font-size: calc(0.7*var(--rvv));
+    }
+
     .inventory-list {
-        font-size: calc(0.5*var(--rvv));
+        font-size: calc(0.6*var(--rvv));
         width: 100%;
         align-items: center;
         padding-right: 0;
