@@ -1,4 +1,4 @@
-# [brassicaDB] (https://brassicadb.up.railway.app/inventory)
+# [brassicaDB](https://brassicadb.up.railway.app/inventory)
 
 **brassicaDB** is a searchable and editable vegetable-themed inventory site created with several back-end technologies, including **express**, **node.js**, **mongoDB/mongoose**, and **pug**.
 
