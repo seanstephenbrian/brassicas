@@ -5,4 +5,4 @@
 using mdn's 'local library' express tutorial as my guide, i built out the brassicaDB web app, covering key topics 
 such as database access/management, route handling, and the model-view-controller design pattern, as well as recommended approaches for dynamically rendering content using templates, processing user form input, and deploying to production.
 
-*if you wish to test the delete functionality, feel free to do so: the secret password is 'IHaveThePower'*
+*feel free to test the delete functionality: the secret password is 'IHaveThePower'*
